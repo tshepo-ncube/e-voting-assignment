@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
-
+import { TextField, Button, Typography, Box } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   getFirestore,
   collection,
@@ -34,11 +34,12 @@ const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-function LoginForm({ setLoggedIn }) {
+function LoginForm({ setLoggedIn, setTab }) {
   const [user, setUser] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [inProgress, setInProgress] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -50,6 +51,7 @@ function LoginForm({ setLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setInProgress(true);
     // Add your login logic here
     setEmail("");
     console.log("Email:", email);
@@ -87,6 +89,7 @@ function LoginForm({ setLoggedIn }) {
             localStorage.setItem("Age", candidateData.Age);
 
             setError(null); // Clear any previous errors
+            setTab("Vote");
           } else {
             // Display error message for incorrect email/password
             setError("Invalid email or password");
@@ -102,6 +105,7 @@ function LoginForm({ setLoggedIn }) {
       }
     };
     fetchData();
+    setInProgress(false);
   };
 
   //   useEffect(() => {
@@ -159,6 +163,15 @@ function LoginForm({ setLoggedIn }) {
           >
             {error}
           </Typography>
+        )}
+        {inProgress ? (
+          <>
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          </>
+        ) : (
+          <></>
         )}
         <Button variant="contained" color="primary" type="submit">
           login

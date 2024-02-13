@@ -17,7 +17,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(
     false || localStorage.getItem("loggedIn")
   );
-  const [Tab, setTab] = useState("Vote");
+  const [Tab, setTab] = useState("Voting Results");
   return (
     <div className="">
       {/* <ButtonAppBar /> */}
@@ -27,6 +27,22 @@ function App() {
         setTab={setTab}
       />
       {/* <CandidatesGrid /> */}
+
+      {Tab == "Login" ? (
+        <>
+          <LoginForm setLoggedIn={setLoggedIn} setTab={setTab} />
+        </>
+      ) : (
+        <></>
+      )}
+
+      {Tab == "Voting Results" ? (
+        <>
+          <VoteViewer />
+        </>
+      ) : (
+        <></>
+      )}
 
       {loggedIn ? (
         <div style={{ padding: 10 }}>
@@ -38,18 +54,11 @@ function App() {
           ) : (
             <></>
           )}
-          {Tab == "Voting Results" ? (
-            <>
-              <VoteViewer />
-            </>
-          ) : (
-            <></>
-          )}
         </div>
       ) : (
         <>
-          <p>Please log in to access the content.</p>
-          <LoginForm setLoggedIn={setLoggedIn} />
+          {/* <p>Please log in to access the content.</p>
+          <LoginForm setLoggedIn={setLoggedIn} /> */}
         </>
       )}
 

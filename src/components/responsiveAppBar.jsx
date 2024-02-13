@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { red } from "@mui/material/colors";
-const pages = ["Voting Results", "Vote"];
+const pages = ["Voting Results"];
 const settings = ["Profile", "Logout"];
 
 function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
@@ -35,6 +35,10 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
 
     if (page == "Vote") {
       setTab("Vote");
+    }
+
+    if (page == "Login") {
+      setTab("Login");
     }
   };
 
@@ -103,6 +107,26 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+
+              {!loggedIn ? (
+                <>
+                  <MenuItem onClick={() => handleCloseNavMenu("Login")}>
+                    <Typography textAlign="center">Login</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <></>
+              )}
+
+              {loggedIn ? (
+                <>
+                  <MenuItem onClick={() => handleCloseNavMenu("Vote")}>
+                    <Typography textAlign="center">Vote</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <></>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -134,6 +158,29 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
                 {page}
               </Button>
             ))}
+
+            {loggedIn ? (
+              <>
+                <MenuItem onClick={() => handleCloseNavMenu("Vote")}>
+                  <Typography textAlign="center">Vote</Typography>
+                </MenuItem>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {!loggedIn ? (
+              <>
+                <Button
+                  onClick={() => handleCloseNavMenu("Login")}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Login
+                </Button>
+              </>
+            ) : (
+              <></>
+            )}
           </Box>
           {loggedIn ? (
             <>
