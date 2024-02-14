@@ -47,6 +47,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
     if (setting == "Logout") {
       setLoggedIn(false);
       localStorage.clear();
+      setTab("Voting Results");
     }
   };
 

@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import CandidateCard from "./candidateCard";
-
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 import {
   getFirestore,
   collection,
@@ -48,6 +49,7 @@ const db = getFirestore(app);
 
 export default function CandidatesGrid() {
   const [candidates, setCandidates] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       const candidatesCollection = collection(db, "candidates");
@@ -64,6 +66,7 @@ export default function CandidatesGrid() {
       });
 
       setCandidates(newCandidatesArray);
+      setLoading(false);
     };
 
     fetchData();
@@ -75,11 +78,55 @@ export default function CandidatesGrid() {
           <CandidateCard candidateData={candidates[0]} />
         </Grid> */}
 
-        {candidates.map((candidate, index) => (
-          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-            <CandidateCard candidateData={candidate} />
-          </Grid>
-        ))}
+        {loading ? (
+          <>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rounded" width={250} height={120} />
+            </Grid>
+          </>
+        ) : (
+          <>
+            {candidates.map((candidate, index) => (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <CandidateCard candidateData={candidate} />
+              </Grid>
+            ))}
+          </>
+        )}
+
         {/* <Grid item xs={12} sm={6} md={4} lg={3}>
           <CandidateCard />
         </Grid>
