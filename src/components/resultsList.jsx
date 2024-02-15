@@ -91,9 +91,14 @@ export default function OverallResultsList() {
           {candidates.map((candidate, index) => (
             <ListItem>
               <ListItemAvatar>
-                <Avatar>
+                {/* <Avatar>
                   <ImageIcon />
-                </Avatar>
+                </Avatar> */}
+
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                />
               </ListItemAvatar>
               <ListItemText
                 primary={`${candidate.Name} ${candidate.Surname}`}

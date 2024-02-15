@@ -40,6 +40,10 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
     if (page === "Login") {
       setTab("Login");
     }
+
+    if (page === "Register") {
+      setTab("Register");
+    }
   };
 
   const handleCloseUserMenu = (setting) => {
@@ -114,6 +118,10 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
                   <MenuItem onClick={() => handleCloseNavMenu("Login")}>
                     <Typography textAlign="center">Login</Typography>
                   </MenuItem>
+
+                  <MenuItem onClick={() => handleCloseNavMenu("Regiter")}>
+                    <Typography textAlign="center">Register</Typography>
+                  </MenuItem>
                 </>
               ) : (
                 <></>
@@ -177,6 +185,13 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   Login
+                </Button>
+
+                <Button
+                  onClick={() => handleCloseNavMenu("Register")}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Register
                 </Button>
               </>
             ) : (

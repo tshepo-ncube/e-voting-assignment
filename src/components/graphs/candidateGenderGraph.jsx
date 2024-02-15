@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import CandidateCard from "../candidateCard";
+import CircularProgress from "@mui/material/CircularProgress";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import InputLabel from "@mui/material/InputLabel";
@@ -126,6 +127,7 @@ export default function CandidateGenderGraph() {
         newCandidatesArray.push({ id: candidateId, ...candidateData });
         console.log("Candidate data:", candidateData);
         console.log("Candidate ID:", candidateId);
+        setChosenCandidate(candidateId);
       });
 
       setCandidates(newCandidatesArray);
@@ -316,38 +318,63 @@ export default function CandidateGenderGraph() {
 
   return (
     <Box sx={{ flexGrow: 1, padding: 4 }}>
-      <FormControl style={{ width: 160 }}>
-        <InputLabel id="demo-simple-select-label">Candidate</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={chosenCandidate}
-          label="Candidate"
-          onChange={handleChange}
-        >
-          {candidates.map((candidate, index) => (
-            <MenuItem value={candidate.id}>{candidate.Name}</MenuItem>
-          ))}
+      {loading ? (
+        <>
+          {/* <Skeleton variant="rounded" width={"100%"} height={500} /> */}
 
-          {/* <MenuItem value={20}>Twenty</MenuItem>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Skeleton variant="rounded" width={"100%"} height={250} />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Skeleton variant="rounded" width={"100%"} height={250} />
+              </Grid>
+            </Grid>
+          </Box>
+          {/* 
+          <center>
+            <CircularProgress style={{ width: "40%", height: "40%" }} />
+          </center> */}
+        </>
+      ) : (
+        <>
+          <div>
+            <FormControl style={{ width: 160 }}>
+              <InputLabel id="demo-simple-select-label">Candidate</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={chosenCandidate}
+                label="Candidate"
+                onChange={handleChange}
+              >
+                {candidates.map((candidate, index) => (
+                  <MenuItem value={candidate.id}>{candidate.Name}</MenuItem>
+                ))}
+
+                {/* <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem> */}
-        </Select>
-      </FormControl>
+              </Select>
+            </FormControl>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Bar data={chartData} options={chartOptions} />;
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Bar
-              style={{ padding: 20, width: "80%" }}
-              data={data}
-              options={options}
-            ></Bar>
-          </Grid>
-        </Grid>
-      </Box>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Bar data={chartData} options={chartOptions} />;
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Bar
+                    style={{ padding: 20, width: "80%" }}
+                    data={data}
+                    options={options}
+                  ></Bar>
+                </Grid>
+              </Grid>
+            </Box>
+          </div>
+        </>
+      )}
     </Box>
   );
 }

@@ -101,7 +101,20 @@ export default function ProvincialResults() {
       setLoading(false);
     };
 
-    const fetchProvinces = async () => {
+    const fetchProvinces = () => {
+      Gauteng();
+      Limpopo();
+      KZN();
+      NorthWest();
+      WesternCape();
+      EasternCape();
+      NorthernCape();
+      FreeState();
+      mpumalanga();
+      setLoading(false);
+    };
+
+    const Gauteng = async () => {
       const provincialResultsCollection = collection(db, "provincialResults");
       const gautengDocRef = doc(provincialResultsCollection, "Gauteng");
 
@@ -135,10 +148,288 @@ export default function ProvincialResults() {
         console.log("Document not found.");
         //setCandidates([]);
       }
+    };
+    const Limpopo = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Limpopo");
 
-      setLoading(false);
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Limpopo"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
     };
 
+    const KZN = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "KwaZulu-Natal");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["KwaZulu-Natal"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const WesternCape = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Western Cape");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Western Cape"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const NorthWest = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "North West");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["North West"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const EasternCape = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Eastern Cape");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Eastern Cape"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const NorthernCape = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Northern Cape");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Northern Cape"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const FreeState = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Free State");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Free State"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
+    const mpumalanga = async () => {
+      const provincialResultsCollection = collection(db, "provincialResults");
+      const gautengDocRef = doc(provincialResultsCollection, "Mpumalanga");
+
+      const gautengDoc = await getDoc(gautengDocRef);
+
+      if (gautengDoc.exists()) {
+        const candidateData = gautengDoc.data();
+        console.log("Province Results for Gauteng --------------------");
+
+        // setCandidates([candidateData]);
+
+        // Convert the object into an array of key-value pairs
+        const keyValueArray = Object.entries(candidateData);
+
+        // Sort the array based on the values (second element in each pair)
+        keyValueArray.sort((a, b) => b[1] - a[1]);
+
+        // Convert the sorted array back into an object
+        const sortedObject = Object.fromEntries(keyValueArray);
+
+        console.log(candidateData);
+
+        var provinceTemp = provinceData;
+        provinceTemp["Mpumalanga"] = sortedObject;
+
+        setProvinceData(provinceTemp);
+
+        console.log(provinceData);
+        console.log(candidateMap);
+      } else {
+        console.log("Document not found.");
+        //setCandidates([]);
+      }
+    };
     // const fetchUsers = async () => {
     //   const usersCollection = collection(db, "users");
     //   const usersSnapshot = await getDocs(candidatesCollection);
@@ -180,9 +471,13 @@ export default function ProvincialResults() {
     const candidate = candidates.find((candidate) => candidate.id === id);
     return candidate ? candidate.Name : "Candidate not found";
   };
+  function isObjectNotEmpty(obj) {
+    return !(Object.keys(obj).length === 0 && obj.constructor === Object);
+  }
 
   console.log(getCandidateNameById());
-
+  console.log(`Limpopo Data :${provinceData["Limpopo"]}`);
+  console.log(provinceData["Limpopo"]);
   return (
     <List
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -222,7 +517,7 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Gauteng"]) ? (
             <>
               {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
                 // <div key={key}>
@@ -233,13 +528,14 @@ export default function ProvincialResults() {
                   <ListItemIcon>
                     <Avatar
                       alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
+                      src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
                       sx={{ width: 30, height: 30 }}
                     >
                       {value}
                     </Avatar>
                   </ListItemIcon>
                   <ListItemText primary={getCandidateNameById(key)} />
+                  <ListItemText primary={`${value} Votes`} />
                 </ListItemButton>
               ))}
             </>
@@ -274,9 +570,9 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Limpopo"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
+              {Object.entries(provinceData["Limpopo"]).map(([key, value]) => (
                 // <div key={key}>
                 //   Key: {key}, Value: {value}
                 // </div>
@@ -285,7 +581,7 @@ export default function ProvincialResults() {
                   <ListItemIcon>
                     <Avatar
                       alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
+                      src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
                       sx={{ width: 30, height: 30 }}
                     >
                       {value}
@@ -326,26 +622,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Western Cape"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["Western Cape"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -378,26 +676,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Eastern Cape"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["Eastern Cape"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -430,26 +730,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["KwaZulu-Natal"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["KwaZulu-Natal"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -482,26 +784,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Mpumalanga"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["Mpumalanga"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -534,26 +838,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["North West"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["North West"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -586,26 +892,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Northern Cape"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["Northern Cape"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
@@ -638,26 +946,28 @@ export default function ProvincialResults() {
             <ListItemText primary="Whoo" />
           </ListItemButton> */}
 
-          {provinceData["Gauteng"] ? (
+          {isObjectNotEmpty(provinceData["Free State"]) ? (
             <>
-              {Object.entries(provinceData["Gauteng"]).map(([key, value]) => (
-                // <div key={key}>
-                //   Key: {key}, Value: {value}
-                // </div>
+              {Object.entries(provinceData["Free State"]).map(
+                ([key, value]) => (
+                  // <div key={key}>
+                  //   Key: {key}, Value: {value}
+                  // </div>
 
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 30, height: 30 }}
-                    >
-                      {value}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText primary={getCandidateNameById(key)} />
-                </ListItemButton>
-              ))}
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                        sx={{ width: 30, height: 30 }}
+                      >
+                        {value}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText primary={getCandidateNameById(key)} />
+                  </ListItemButton>
+                )
+              )}
             </>
           ) : (
             <>
