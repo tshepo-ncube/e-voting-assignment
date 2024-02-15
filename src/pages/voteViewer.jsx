@@ -3,6 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import OverallResultsList from "../components/resultsList";
 import ProvincialResults from "../components/provincialResults";
+import CandidateGenderGraph from "../components/graphs/candidateGenderGraph";
 export default function VoteViewer() {
   const [alignment, setAlignment] = React.useState("Overall Results");
 
@@ -26,23 +27,32 @@ export default function VoteViewer() {
           onChange={handleChange}
           aria-label="Platform"
         >
-          <ToggleButton value="Overall Results">Overall Results</ToggleButton>
-          <ToggleButton value="Provincial Results">
-            Provincial Results
-          </ToggleButton>
-          {/* <ToggleButton value="ios">iOS</ToggleButton> */}
+          <ToggleButton value="Overall Results">Overall</ToggleButton>
+          <ToggleButton value="Provincial Results">Provincial</ToggleButton>
+          <ToggleButton value="Graphs">Graphs</ToggleButton>
         </ToggleButtonGroup>
-
         {/* <OverallResultsList /> */}
 
-        {alignment == "Overall Results" ? (
+        {alignment === "Overall Results" ? (
           <>
             <OverallResultsList />
           </>
         ) : (
+          <></>
+        )}
+        {alignment === "Provincial Results" ? (
           <>
             <ProvincialResults />
           </>
+        ) : (
+          <></>
+        )}
+        {alignment === "Graphs" ? (
+          <>
+            <CandidateGenderGraph />
+          </>
+        ) : (
+          <></>
         )}
       </center>
     </div>

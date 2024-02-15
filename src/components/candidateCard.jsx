@@ -44,10 +44,14 @@ export default function CandidateCard({ candidateData }) {
     candidateData.Votes
   );
 
-  const incrementProvincialTransaction = async (userProvince) =>
+  const incrementProvincialTransaction = async () =>
     // async function incrementVotesTransaction(candidateId)
     {
-      const provinceRef = doc(db, "provincialResults", "Gauteng");
+      const provinceRef = doc(
+        db,
+        "provincialResults",
+        localStorage.getItem("Province")
+      );
 
       try {
         // Start a transaction
@@ -61,7 +65,7 @@ export default function CandidateCard({ candidateData }) {
           }
 
           // Get the current value of the dynamic field
-          const dynamicFieldName = "Thspoe";
+          const dynamicFieldName = candidate.id;
           const currentVotes = docSnapshot.data()[dynamicFieldName] || 0;
 
           // Increment the value by 1
@@ -255,7 +259,7 @@ export default function CandidateCard({ candidateData }) {
         <CardMedia
           component="img"
           height="140"
-          image="https://plus.unsplash.com/premium_photo-1663932464823-1e85942a1115?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8"
+          image="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
           alt="green iguana"
         />
         <CardContent>

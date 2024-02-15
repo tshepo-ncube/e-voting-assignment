@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { red } from "@mui/material/colors";
-const pages = ["Voting Results"];
+const pages = ["Results"];
 const settings = ["Profile", "Logout"];
 
 function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
@@ -29,25 +29,25 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
-    if (page == "Voting Results") {
-      setTab("Voting Results");
+    if (page === "Results") {
+      setTab("Results");
     }
 
-    if (page == "Vote") {
+    if (page === "Vote") {
       setTab("Vote");
     }
 
-    if (page == "Login") {
+    if (page === "Login") {
       setTab("Login");
     }
   };
 
   const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
-    if (setting == "Logout") {
+    if (setting === "Logout") {
       setLoggedIn(false);
       localStorage.clear();
-      setTab("Voting Results");
+      setTab("Results");
     }
   };
 

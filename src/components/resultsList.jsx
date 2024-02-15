@@ -78,12 +78,12 @@ export default function OverallResultsList() {
             {/* For other variants, adjust the size with `width` and `height` */}
             {/* <Skeleton variant="circular" width={40} height={40} />
             <Skeleton variant="rectangular" width={210} height={60} /> */}
-            <Skeleton variant="rounded" width={340} height={60} />
-            <Skeleton variant="rounded" width={340} height={60} />
-            <Skeleton variant="rounded" width={340} height={60} />
-            <Skeleton variant="rounded" width={340} height={60} />
-            <Skeleton variant="rounded" width={340} height={60} />
-            <Skeleton variant="rounded" width={340} height={60} />
+            <Skeleton key={"12"} variant="rounded" width={340} height={60} />
+            <Skeleton key={"2"} variant="rounded" width={340} height={60} />
+            <Skeleton key={"3"} variant="rounded" width={340} height={60} />
+            <Skeleton key={"4"} variant="rounded" width={340} height={60} />
+            <Skeleton key={"5"} variant="rounded" width={340} height={60} />
+            <Skeleton key={"6"} variant="rounded" width={340} height={60} />
           </Stack>
         </>
       ) : (

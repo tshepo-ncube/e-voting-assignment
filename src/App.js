@@ -17,7 +17,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(
     false || localStorage.getItem("loggedIn")
   );
-  const [Tab, setTab] = useState("Voting Results");
+  const [Tab, setTab] = useState("Results");
   return (
     <div className="">
       {/* <ButtonAppBar /> */}
@@ -36,7 +36,7 @@ function App() {
         <></>
       )}
 
-      {Tab == "Voting Results" ? (
+      {Tab == "Results" ? (
         <>
           <VoteViewer />
         </>
