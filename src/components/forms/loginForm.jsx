@@ -10,6 +10,9 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -40,6 +43,7 @@ function LoginForm({ setLoggedIn, setTab }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [inProgress, setInProgress] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -47,6 +51,18 @@ function LoginForm({ setLoggedIn, setTab }) {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -79,6 +95,7 @@ function LoginForm({ setLoggedIn, setTab }) {
             // Successful login logic here
             console.log("Login successful!");
             setLoggedIn(true);
+            handleClick();
             localStorage.setItem("Email", candidateData.Email);
             localStorage.setItem("Name", candidateData.Name);
             localStorage.setItem("Surname", candidateData.Surname);
@@ -132,6 +149,22 @@ function LoginForm({ setLoggedIn, setTab }) {
 
   //     fetchData();
   //   }, []);
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
   return (
     <div>
       <form style={{ padding: 50 }} onSubmit={handleSubmit}>
@@ -173,6 +206,13 @@ function LoginForm({ setLoggedIn, setTab }) {
         ) : (
           <></>
         )}
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="Note archived"
+          action={action}
+        />
         <Button variant="contained" color="primary" type="submit">
           login
         </Button>

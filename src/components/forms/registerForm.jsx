@@ -11,6 +11,9 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -51,6 +54,21 @@ function RegisterForm({ setLoggedIn, setTab }) {
   const [age, setAge] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -125,6 +143,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
       // Save the document
       setDoc(docRef, data)
         .then(() => {
+          handleClick();
           console.log("Document successfully written!");
           localStorage.setItem("Email", email);
           localStorage.setItem("Name", name);
@@ -258,6 +277,22 @@ function RegisterForm({ setLoggedIn, setTab }) {
     setGender(event.target.value);
   };
 
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
   return (
     <div>
       <form style={{ padding: 50 }} onSubmit={handleSubmit}>
@@ -365,6 +400,15 @@ function RegisterForm({ setLoggedIn, setTab }) {
         ) : (
           <></>
         )}
+
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="Note archived"
+          action={action}
+        />
+
         <Button variant="contained" color="primary" type="submit">
           Register
         </Button>
