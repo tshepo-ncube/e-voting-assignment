@@ -18,6 +18,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { InputGroup } from "react-bootstrap";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -45,6 +46,23 @@ function RegisterForm({ setLoggedIn, setTab }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [inProgress, setInProgress] = useState(false);
+  const [surname, setSurname] = useState("");
+  const [age, setAge] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleSurnameChange = (e) => setSurname(e.target.value);
+
+  const handleAgeChange = (e) => {
+    setAge(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -56,60 +74,106 @@ function RegisterForm({ setLoggedIn, setTab }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setInProgress(true);
-    // Add your login logic here
-    setEmail("");
-    console.log("Email:", email);
-    console.log("Password:", password);
-    const fetchData = async () => {
-      try {
-        const candidateDocRef = doc(db, "users", "m@gmail.com");
-        const candidateDocSnapshot = await getDoc(candidateDocRef);
+    // setInProgress(true);
+    // // Add your login logic here
+    // setEmail("");
+    // console.log("Email:", email);
+    // console.log("Password:", password);
 
-        if (candidateDocSnapshot.exists()) {
-          const candidateData = candidateDocSnapshot.data();
-          const candidateId = candidateDocSnapshot.id;
-
-          setUser({ id: candidateId, ...candidateData });
-
-          console.log("Candidate data:", candidateData);
-          console.log("Candidate ID:", candidateId);
-          console.log(`from db ${candidateData.Email}`);
-          console.log(`from db ${candidateData.Password}`);
-          // Check if the entered email and password match
-          if (
-            email === candidateData.Email &&
-            password === candidateData.Password
-          ) {
-            // Successful login logic here
-            console.log("Login successful!");
-            setLoggedIn(true);
-            localStorage.setItem("Email", candidateData.Email);
-            localStorage.setItem("Name", candidateData.Name);
-            localStorage.setItem("Surname", candidateData.Surname);
-            localStorage.setItem("loggedIn", true);
-            localStorage.setItem("Province", candidateData.Province);
-            localStorage.setItem("ID", candidateId);
-            localStorage.setItem("Voted", candidateData.Voted);
-            localStorage.setItem("Age", candidateData.Age);
-
-            setError(null); // Clear any previous errors
-            setTab("Vote");
-          } else {
-            // Display error message for incorrect email/password
-            setError("Invalid email or password");
-            console.log("invalid email or pwd");
-          }
-        } else {
-          console.log("Document not found");
-          setError("User not found");
-        }
-      } catch (error) {
-        console.error("Error during login:", error.message);
-        setError("An error occurred during login");
-      }
+    console.log({
+      name,
+      surname,
+      age,
+      gender,
+      province,
+      email,
+      password,
+      confirmPassword,
+    });
+    const checkEmail = () => {
+      return true;
     };
-    fetchData();
+    const checkAge = () => {
+      if (age >= 18) {
+        return true;
+      }
+      return false;
+    };
+
+    const registerUser = () => {};
+
+    const checkPassword = () => {
+      if (password === confirmPassword) {
+        return true;
+      }
+
+      return false;
+    };
+
+    if (!checkEmail()) {
+    }
+
+    if (!checkAge()) {
+    }
+
+    if (!checkPassword()) {
+    }
+
+    registerUser();
+
+    //check the email, if its real....
+    //check the age, if its >=18...
+    //check if password==confirmPassword
+
+    // const fetchData = async () => {
+    //   try {
+    //     const candidateDocRef = doc(db, "users", "m@gmail.com");
+    //     const candidateDocSnapshot = await getDoc(candidateDocRef);
+
+    //     if (candidateDocSnapshot.exists()) {
+    //       const candidateData = candidateDocSnapshot.data();
+    //       const candidateId = candidateDocSnapshot.id;
+
+    //       setUser({ id: candidateId, ...candidateData });
+
+    //       console.log("Candidate data:", candidateData);
+    //       console.log("Candidate ID:", candidateId);
+    //       console.log(`from db ${candidateData.Email}`);
+    //       console.log(`from db ${candidateData.Password}`);
+    //       // Check if the entered email and password match
+    //       if (
+    //         email === candidateData.Email &&
+    //         password === candidateData.Password
+    //       ) {
+    //         // Successful login logic here
+    //         console.log("Login successful!");
+    //         setLoggedIn(true);
+    //         localStorage.setItem("Email", candidateData.Email);
+    //         localStorage.setItem("Name", candidateData.Name);
+    //         localStorage.setItem("Surname", candidateData.Surname);
+    //         localStorage.setItem("loggedIn", true);
+    //         localStorage.setItem("Province", candidateData.Province);
+    //         localStorage.setItem("ID", candidateId);
+    //         localStorage.setItem("Voted", candidateData.Voted);
+    //         localStorage.setItem("Age", candidateData.Age);
+
+    //         setError(null); // Clear any previous errors
+    //         setTab("Vote");
+    //       } else {
+    //         // Display error message for incorrect email/password
+    //         setError("Invalid email or password");
+    //         console.log("invalid email or pwd");
+    //       }
+    //     } else {
+    //       console.log("Document not found");
+    //       setError("User not found");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error during login:", error.message);
+    //     setError("An error occurred during login");
+    //   }
+    // };
+    // fetchData();
     setInProgress(false);
   };
 
@@ -160,24 +224,24 @@ function RegisterForm({ setLoggedIn, setTab }) {
           variant="outlined"
           fullWidth
           margin="normal"
-          value={email}
-          onChange={handleEmailChange}
+          value={name}
+          onChange={handleNameChange}
         />
         <TextField
           label="Surname"
           variant="outlined"
           fullWidth
           margin="normal"
-          value={email}
-          onChange={handleEmailChange}
+          value={surname}
+          onChange={handleSurnameChange}
         />
         <TextField
           label="Age"
           variant="outlined"
           fullWidth
           margin="normal"
-          value={email}
-          onChange={handleEmailChange}
+          value={age}
+          onChange={handleAgeChange}
         />
         <FormControl style={{ width: 200, padding: 10 }}>
           <InputLabel id="demo-simple-select-label">Province</InputLabel>
@@ -188,15 +252,15 @@ function RegisterForm({ setLoggedIn, setTab }) {
             label="Province"
             onChange={handleProvinceChange}
           >
-            <MenuItem value={10}>Gauteng</MenuItem>
-            <MenuItem value={20}>KwaZulu-Natal</MenuItem>
-            <MenuItem value={30}>Limpopo</MenuItem>
-            <MenuItem value={40}>Mpumalanga</MenuItem>
-            <MenuItem value={50}>North West</MenuItem>
-            <MenuItem value={60}>Northern Cape</MenuItem>
-            <MenuItem value={70}>Eastern Cape</MenuItem>
-            <MenuItem value={80}>Western Cape</MenuItem>
-            <MenuItem value={90}>Free State</MenuItem>
+            <MenuItem value={"Gauteng"}>Gauteng</MenuItem>
+            <MenuItem value={"KwaZulu-Natal"}>KwaZulu-Natal</MenuItem>
+            <MenuItem value={"Limpopo"}>Limpopo</MenuItem>
+            <MenuItem value={"Mpumalanga"}>Mpumalanga</MenuItem>
+            <MenuItem value={"North West"}></MenuItem>
+            <MenuItem value={"Northern Cape"}>Northern Cape</MenuItem>
+            <MenuItem value={"Eastern Cape"}>Eastern Cape</MenuItem>
+            <MenuItem value={"Western Cape"}>Western Cape</MenuItem>
+            <MenuItem value={"Free State"}>Free State</MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ width: 200, padding: 10 }}>
@@ -208,8 +272,8 @@ function RegisterForm({ setLoggedIn, setTab }) {
             label="Province"
             onChange={handleGenderChange}
           >
-            <MenuItem value={10}>Male</MenuItem>
-            <MenuItem value={20}>Female</MenuItem>
+            <MenuItem value={"Male"}>Male</MenuItem>
+            <MenuItem value={"Female"}>Female</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -236,8 +300,8 @@ function RegisterForm({ setLoggedIn, setTab }) {
           fullWidth
           margin="normal"
           type="password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
         />
         {error && (
           <Typography
@@ -258,7 +322,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           <></>
         )}
         <Button variant="contained" color="primary" type="submit">
-          login
+          Register
         </Button>
       </form>
     </div>
