@@ -7,6 +7,7 @@ import {
   addDoc,
   doc,
   getDoc,
+  setDoc,
   getDocs,
   runTransaction,
 } from "firebase/firestore";
@@ -90,27 +91,70 @@ function RegisterForm({ setLoggedIn, setTab }) {
       password,
       confirmPassword,
     });
-    const checkEmail = () => {
+    const checkIfEmailTrue = () => {
+      return true;
+    };
+
+    const checkEmailExist = () => {
       return true;
     };
     const checkAge = () => {
       if (age >= 18) {
         return true;
       }
+      setError("Only people above 18 years old are allowed to register.");
       return false;
     };
 
-    const registerUser = () => {};
+    const registerUser = () => {
+      // Create a reference to the document
+      const docRef = doc(db, "users", email);
+
+      // Set the data in the document
+      const data = {
+        Name: name,
+        Surname: surname,
+        Age: age,
+        Gender: gender,
+        Province: province,
+        Email: email,
+        Password: password,
+        Voted: false,
+      };
+
+      // Save the document
+      setDoc(docRef, data)
+        .then(() => {
+          console.log("Document successfully written!");
+          localStorage.setItem("Email", email);
+          localStorage.setItem("Name", name);
+          localStorage.setItem("Surname", surname);
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem("Province", province);
+          localStorage.setItem("ID", "id");
+          localStorage.setItem("Voted", false);
+          localStorage.setItem("Age", age);
+          setTab("Vote");
+          setLoggedIn(true);
+          setError(null);
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    };
 
     const checkPassword = () => {
       if (password === confirmPassword) {
         return true;
       }
-
+      setError("Passwords do not match.");
       return false;
     };
 
-    if (!checkEmail()) {
+    if (!checkEmailExist()) {
+    }
+
+    if (checkIfEmailTrue()) {
     }
 
     if (!checkAge()) {
