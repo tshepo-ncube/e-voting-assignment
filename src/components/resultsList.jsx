@@ -17,6 +17,7 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+import DB from "../data/dataApi";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -39,27 +40,41 @@ const db = getFirestore(app);
 export default function OverallResultsList() {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  //const dataObject = new DB();
+
   useEffect(() => {
     const fetchData = async () => {
-      const candidatesCollection = collection(db, "candidates");
-      const candidatesSnapshot = await getDocs(candidatesCollection);
+      try {
+        setLoading(true);
+        const candidatesData = await DB.getCandidates();
+        setCandidates(candidatesData);
+      } catch (error) {
+        console.error("Error fetching candidates:", error);
+      } finally {
+        setLoading(false);
+      }
 
-      const newCandidatesArray = [];
+      try {
+        setLoading(true);
+        // const candidatesData = await DB.getCandidates();
+        // setCandidates(candidatesData);
 
-      candidatesSnapshot.forEach((doc) => {
-        const candidateData = doc.data();
-        const candidateId = doc.id; // Access the document ID
-        newCandidatesArray.push({ id: candidateId, ...candidateData });
-        console.log("Candidate data:", candidateData);
-        console.log("Candidate ID:", candidateId);
-      });
-      newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
-      setCandidates(newCandidatesArray);
-      setLoading(false);
+        // const gautengData = await DB.Gauteng();
+        // console.log(gautengData);
+
+        // const LimpopoData = await DB.Gauteng();
+        // console.log(LimpopoData);
+        console.log(DB.getProvinces());
+      } catch (error) {
+        console.error("Error fetching Provinces:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
+
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       {/* <ListItem>

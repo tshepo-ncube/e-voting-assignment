@@ -11,6 +11,8 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+
+import DB from "../../data/dataApi";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -124,42 +126,38 @@ function RegisterForm({ setLoggedIn, setTab }) {
       return false;
     };
 
-    const registerUser = () => {
-      // Create a reference to the document
-      const docRef = doc(db, "users", email);
+    const registerUser = async () => {
+      try {
+        const status = await DB.registerUser(
+          name,
+          surname,
+          age,
+          province,
+          gender,
+          email,
+          password,
+          setTab,
+          setError,
+          setLoggedIn,
+          handleClick
+        );
 
-      // Set the data in the document
-      const data = {
-        Name: name,
-        Surname: surname,
-        Age: age,
-        Gender: gender,
-        Province: province,
-        Email: email,
-        Password: password,
-        Voted: false,
-      };
+        // console.log(status);
 
-      // Save the document
-      setDoc(docRef, data)
-        .then(() => {
-          handleClick();
-          console.log("Document successfully written!");
-          localStorage.setItem("Email", email);
-          localStorage.setItem("Name", name);
-          localStorage.setItem("Surname", surname);
-          localStorage.setItem("loggedIn", true);
-          localStorage.setItem("Province", province);
-          localStorage.setItem("ID", "id");
-          localStorage.setItem("Voted", false);
-          localStorage.setItem("Age", age);
-          setTab("Vote");
-          setLoggedIn(true);
-          setError(null);
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-        });
+        // if (status.registeredUser) {
+        //   handleClick();
+        //   setTab("Vote");
+        //   setLoggedIn(true);
+        //   setError(null);
+        // } else {
+        //   setError(status.Error);
+        // }
+      } catch (error) {
+        console.error("Error during registration:", error.message);
+        setError("An error occurred during registration");
+      } finally {
+        setInProgress(false);
+      }
     };
 
     const checkPassword = () => {
@@ -180,6 +178,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
     }
 
     if (!checkPassword()) {
+      return;
     }
 
     registerUser();

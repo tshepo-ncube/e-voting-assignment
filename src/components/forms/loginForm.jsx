@@ -10,6 +10,8 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+
+import DB from "../../data/dataApi";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -72,6 +74,29 @@ function LoginForm({ setLoggedIn, setTab }) {
     setEmail("");
     console.log("Email:", email);
     console.log("Password:", password);
+
+    const fetchUser = async () => {
+      try {
+        setInProgress(true);
+        const status = await DB.loginUser(email, password);
+
+        if (status.loggedIn) {
+          // Successful login logic here
+          console.log("Login successful!");
+          setLoggedIn(true);
+          handleClick();
+
+          setError(null); // Clear any previous errors
+          setTab("Vote");
+        } else {
+          setError(status.Error);
+        }
+      } catch (error) {
+        console.error("Error loggin in:", error);
+      } finally {
+        setInProgress(false);
+      }
+    };
     const fetchData = async () => {
       try {
         const candidateDocRef = doc(db, "users", "m@gmail.com");
@@ -121,7 +146,7 @@ function LoginForm({ setLoggedIn, setTab }) {
         setError("An error occurred during login");
       }
     };
-    fetchData();
+    fetchUser();
     setInProgress(false);
   };
 

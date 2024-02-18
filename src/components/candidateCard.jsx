@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
+import DB from "../data/dataApi";
 import {
   getFirestore,
   collection,
@@ -44,80 +45,80 @@ export default function CandidateCard({ candidateData }) {
     candidateData.Votes
   );
 
-  const incrementProvincialTransaction = async () =>
-    // async function incrementVotesTransaction(candidateId)
-    {
-      const provinceRef = doc(
-        db,
-        "provincialResults",
-        localStorage.getItem("Province")
-      );
+  // const incrementProvincialTransaction = async () =>
+  //   // async function incrementVotesTransaction(candidateId)
+  //   {
+  //     const provinceRef = doc(
+  //       db,
+  //       "provincialResults",
+  //       localStorage.getItem("Province")
+  //     );
 
-      try {
-        // Start a transaction
-        await runTransaction(db, async (transaction) => {
-          // Get the current data of the document
-          const docSnapshot = await transaction.get(provinceRef);
+  //     try {
+  //       // Start a transaction
+  //       await runTransaction(db, async (transaction) => {
+  //         // Get the current data of the document
+  //         const docSnapshot = await transaction.get(provinceRef);
 
-          // Check if the document exists
-          if (!docSnapshot.exists()) {
-            throw new Error("Province document does not exist!");
-          }
+  //         // Check if the document exists
+  //         if (!docSnapshot.exists()) {
+  //           throw new Error("Province document does not exist!");
+  //         }
 
-          // Get the current value of the dynamic field
-          const dynamicFieldName = candidate.id;
-          const currentVotes = docSnapshot.data()[dynamicFieldName] || 0;
+  //         // Get the current value of the dynamic field
+  //         const dynamicFieldName = candidate.id;
+  //         const currentVotes = docSnapshot.data()[dynamicFieldName] || 0;
 
-          // Increment the value by 1
-          const newVotes = currentVotes + 1;
+  //         // Increment the value by 1
+  //         const newVotes = currentVotes + 1;
 
-          // Create an object to update the dynamic field
-          const updateObject = { [dynamicFieldName]: newVotes };
+  //         // Create an object to update the dynamic field
+  //         const updateObject = { [dynamicFieldName]: newVotes };
 
-          // Update the document with the incremented value
-          transaction.update(provinceRef, updateObject);
-        });
+  //         // Update the document with the incremented value
+  //         transaction.update(provinceRef, updateObject);
+  //       });
 
-        console.log("Transaction successfully committed!");
-        handleVoteClick();
-        handleVotedFor();
-      } catch (error) {
-        console.error("Transaction failed:", error.message);
-      }
-    };
+  //       console.log("Transaction successfully committed!");
+  //       handleVoteClick();
+  //       handleVotedFor();
+  //     } catch (error) {
+  //       console.error("Transaction failed:", error.message);
+  //     }
+  //   };
 
-  const incrementVotesTransaction = async (candidateId) =>
-    // async function incrementVotesTransaction(candidateId)
-    {
-      const candidateRef = doc(db, "candidates", candidateId);
+  // const incrementVotesTransaction = async (candidateId) =>
+  //   // async function incrementVotesTransaction(candidateId)
+  //   {
+  //     const candidateRef = doc(db, "candidates", candidateId);
 
-      try {
-        // Start a transaction
-        await runTransaction(db, async (transaction) => {
-          // Get the current data of the document
-          const docSnapshot = await transaction.get(candidateRef);
+  //     try {
+  //       // Start a transaction
+  //       await runTransaction(db, async (transaction) => {
+  //         // Get the current data of the document
+  //         const docSnapshot = await transaction.get(candidateRef);
 
-          // Check if the document exists
-          if (!docSnapshot.exists()) {
-            throw new Error("Candidate document does not exist!");
-          }
+  //         // Check if the document exists
+  //         if (!docSnapshot.exists()) {
+  //           throw new Error("Candidate document does not exist!");
+  //         }
 
-          // Increment the "Votes" field by 1
-          const currentVotes = docSnapshot.data().Votes || 0;
-          const newVotes = currentVotes + 1;
+  //         // Increment the "Votes" field by 1
+  //         const currentVotes = docSnapshot.data().Votes || 0;
+  //         const newVotes = currentVotes + 1;
 
-          // Update the document with the incremented value
-          transaction.update(candidateRef, { Votes: newVotes });
-        });
+  //         // Update the document with the incremented value
+  //         transaction.update(candidateRef, { Votes: newVotes });
+  //       });
 
-        console.log("Transaction successfully committed!");
-        handleVoteClick();
-        handleVotedFor();
-        incrementProvincialTransaction();
-      } catch (error) {
-        console.error("Transaction failed:", error.message);
-      }
-    };
+  //       console.log("Transaction successfully committed!");
+  //       handleVoteClick();
+  //       handleVotedFor();
+  //       incrementProvincialTransaction();
+  //     } catch (error) {
+  //       console.error("Transaction failed:", error.message);
+  //     }
+  //   };
 
   const candidateHasVoted = () => {
     console.log("hey there...");
@@ -182,9 +183,6 @@ export default function CandidateCard({ candidateData }) {
   //   const app = initializeApp(firebaseConfig);
   //   const db = app.firestore();
   //   const analytics = getAnalytics(app);
-  const incrementStuff = () => {
-    incrementVotesTransaction("Tshepo");
-  };
 
   const handleVoteClick = () => {
     // Increment the "Votes" value by 1
@@ -209,49 +207,14 @@ export default function CandidateCard({ candidateData }) {
     } else {
       //alert("you have not voted");
       // incrementVotesTransaction("Tshepo");
-      incrementVotesTransaction(candidateData.id);
+      DB.incrementVotesTransaction(
+        candidateData,
+        handleVoteClick,
+        handleVotedFor,
+        DB.incrementProvincialTransaction
+      );
     }
   };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // Initialize Firebase (replace with your Firebase config)
-
-  //     //firebase.initializeApp(firebaseConfig);
-
-  //     // Firestore reference
-  //     //const db = firebase.firestore();
-
-  //     // Specify your document ID
-  //     const docId = "yourDocId";
-
-  //     // Create a reference to the specific document in the "candidates" collection
-  //     // const candidatesCollection = collection(db, "candidates");
-  //     // const candidateSnapshot = await getDoc(candidatesCollection);
-  //     const candidateDocRef = doc(db, "candidates", "cLflbdkulEPm8svZxzht");
-  //     // Set up the listener for changes in the "Votes" field
-  //     const unsubscribe = candidateDocRef.onSnapshot((doc) => {
-  //       if (doc.exists) {
-  //         const votesData = doc.data()?.Votes; // Assuming "Votes" is the field you're interested in
-
-  //         // Log when "Votes" changes
-  //         console.log(`Votes changed to: ${votesData}`);
-
-  //         // Update the state
-  //         // setVotes(votesData);
-  //       } else {
-  //         console.log("Document does not exist");
-  //       }
-  //     });
-
-  //     // Clean up the listener when the component is unmounted
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   return (
     <Card sx={{ maxWidth: 345 }}>

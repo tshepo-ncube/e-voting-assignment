@@ -14,6 +14,8 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+
+import DB from "../data/dataApi";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -52,21 +54,31 @@ export default function CandidatesGrid() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      const candidatesCollection = collection(db, "candidates");
-      const candidatesSnapshot = await getDocs(candidatesCollection);
+      // const candidatesCollection = collection(db, "candidates");
+      // const candidatesSnapshot = await getDocs(candidatesCollection);
 
-      const newCandidatesArray = [];
+      // const newCandidatesArray = [];
 
-      candidatesSnapshot.forEach((doc) => {
-        const candidateData = doc.data();
-        const candidateId = doc.id; // Access the document ID
-        newCandidatesArray.push({ id: candidateId, ...candidateData });
-        console.log("Candidate data:", candidateData);
-        console.log("Candidate ID:", candidateId);
-      });
+      // candidatesSnapshot.forEach((doc) => {
+      //   const candidateData = doc.data();
+      //   const candidateId = doc.id; // Access the document ID
+      //   newCandidatesArray.push({ id: candidateId, ...candidateData });
+      //   console.log("Candidate data:", candidateData);
+      //   console.log("Candidate ID:", candidateId);
+      // });
 
-      setCandidates(newCandidatesArray);
-      setLoading(false);
+      // setCandidates(newCandidatesArray);
+      // setLoading(false);
+
+      try {
+        setLoading(true);
+        const candidatesData = await DB.getCandidates();
+        setCandidates(candidatesData);
+      } catch (error) {
+        console.error("Error fetching candidates:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();

@@ -1,13 +1,55 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyAQApGBO474rvXb0NLeTJjTye5DBUgmHJ0",
-  authDomain: "inf4027workshop.firebaseapp.com",
-  projectId: "inf4027workshop",
-  storageBucket: "inf4027workshop.appspot.com",
-  messagingSenderId: "847946574269",
-  appId: "1:847946574269:web:d618594c3773bed7814ad4",
-  measurementId: "G-BQ911VSE7E",
-};
+// import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 
-const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-const db = getFirestore(app);
+// import { useState, useEffect } from "react";
+// import { initializeApp } from "firebase/app";
+
+// import DB from "./dataApi";
+
+// const getProvinces = () => {
+//   const [provinceData, setProvinceData] = useState({
+//     "Eastern Cape": {},
+//     "Free State": {},
+//     Gauteng: {},
+//     "KwaZulu-Natal": {},
+//     Limpopo: {},
+//     Mpumalanga: {},
+//     "North West": {},
+//     "Northern Cape": {},
+//     "Western Cape": {},
+//   });
+
+//   useEffect(() => {
+//     const fetchProvincesData = async () => {
+//       const db = getFirestore(initializeApp(DB.firebaseConfig));
+
+//       const getProvinceData = async (provinceName) => {
+//         const provincialResultsCollection = collection(db, "provincialResults");
+//         const provinceDocRef = doc(provincialResultsCollection, provinceName);
+
+//         const provinceDoc = await getDoc(provinceDocRef);
+//         if (provinceDoc.exists()) {
+//           const candidateData = provinceDoc.data();
+//           const sortedCandidateData = Object.fromEntries(
+//             Object.entries(candidateData).sort((a, b) => b[1] - a[1])
+//           );
+//           setProvinceData((prevState) => ({
+//             ...prevState,
+//             [provinceName]: sortedCandidateData,
+//           }));
+//         } else {
+//           console.log(`Document not found for ${provinceName}.`);
+//         }
+//       };
+
+//       for (const provinceName of Object.keys(provinceData)) {
+//         await getProvinceData(provinceName);
+//       }
+//     };
+
+//     fetchProvincesData();
+//   }, []);
+
+//   return provinceData;
+// };
+
+// export default getProvinces;
