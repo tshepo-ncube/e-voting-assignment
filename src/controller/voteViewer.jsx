@@ -1,9 +1,9 @@
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import OverallResultsList from "../components/resultsList";
-import ProvincialResults from "../components/provincialResults";
-import CandidateGenderGraph from "../components/graphs/candidateGenderGraph";
+import OverallResultsList from "../view/resultsList";
+import ProvincialResults from "../view/provincialResults";
+import CandidateGenderGraph from "../view/graphs/candidateGenderGraph";
 export default function VoteViewer() {
   const [alignment, setAlignment] = React.useState("Overall Results");
 

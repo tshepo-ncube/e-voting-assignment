@@ -1,17 +1,17 @@
 import "./App.css";
 import React, { useState } from "react";
-import ResponsiveAppBar from "./components/responsiveAppBar";
+import ResponsiveAppBar from "./view/responsiveAppBar";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import LoginForm from "./components/forms/loginForm";
+import LoginForm from "./view/forms/loginForm";
 import Typography from "@mui/material/Typography";
-import VoteViewer from "./pages/voteViewer";
+import VoteViewer from "./controller/voteViewer";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import CandidatesGrid from "./components/candidatesGrid";
-import RegisterForm from "./components/forms/registerForm";
+import CandidatesGrid from "./view/candidatesGrid";
+import RegisterForm from "./view/forms/registerForm";
 // import MenuIcon from "@mui/icons-material/Menu";
 
 function App() {

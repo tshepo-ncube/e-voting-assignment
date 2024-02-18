@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   setDoc,
+  updateDoc,
   getDocs,
   runTransaction,
 } from "firebase/firestore";
@@ -37,6 +38,59 @@ export default class DB {
 
   static app = initializeApp(DB.firebaseConfig);
   static db = getFirestore(DB.app);
+
+  static updateVotedField = async () => {
+    const userEmail = localStorage.getItem("Email");
+    const userRefDoc = doc(DB.db, "users", userEmail);
+
+    try {
+      // Fetch the existing document
+      const userDoc = await getDoc(userRefDoc);
+
+      if (userDoc.exists()) {
+        // Document exists, update the "Voted" field
+        await updateDoc(userRefDoc, {
+          Voted: true,
+        });
+
+        console.log("Document updated successfully");
+        localStorage.setItem("Voted", true);
+      } else {
+        console.log("Document does not exist");
+      }
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
+  static handleVotedFor = async (candidateData) => {
+    const userEmail = localStorage.getItem("Email");
+    const userRefDoc = doc(DB.db, "users", userEmail);
+
+    try {
+      // Fetch the existing document
+      const userDoc = await getDoc(userRefDoc);
+
+      if (userDoc.exists()) {
+        // Document exists, update the "Voted" field
+        await updateDoc(userRefDoc, {
+          CandidateVote: candidateData.id,
+        });
+
+        // await setDoc(
+        //   userRefDoc,
+        //   { CandidateVote: candidateData.id } // Replace 'Voted' with the actual field name in your document
+        //   // { merge: true }
+        // );
+
+        console.log("Document updated successfully");
+        localStorage.setItem("Voted", true);
+      } else {
+        console.log("Document does not exist");
+      }
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
 
   static async getCandidates() {
     const candidatesCollection = collection(DB.db, "candidates");
@@ -168,7 +222,7 @@ export default class DB {
   static incrementVotesTransaction = async (
     candidate,
     handleVoteClick,
-    handleVotedFor,
+
     incrementProvincialTransaction
   ) =>
     // async function incrementVotesTransaction(candidateId)
@@ -196,11 +250,11 @@ export default class DB {
 
         console.log("Transaction successfully committed!");
         handleVoteClick();
-        handleVotedFor();
+        DB.handleVotedFor(candidate);
         DB.incrementProvincialTransaction(
           candidate,
           handleVoteClick,
-          handleVotedFor
+          DB.handleVotedFor
         );
       } catch (error) {
         console.error("Transaction failed:", error.message);
@@ -247,7 +301,7 @@ export default class DB {
 
         console.log("Transaction successfully committed!");
         handleVoteClick();
-        handleVotedFor();
+        DB.handleVotedFor(candidate);
       } catch (error) {
         console.error("Transaction failed:", error.message);
       }
