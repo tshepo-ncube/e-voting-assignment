@@ -44,6 +44,8 @@ import { getAnalytics } from "firebase/analytics";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // Initialize Firebase
 
+import DB from "../../data/dataApi";
+
 ChartJS.register(
   BarElement,
   CategoryScale,
@@ -95,50 +97,25 @@ export default function CandidateGenderGraph() {
     candidateGenderData(chosenCandidate);
     candidateAgeData(chosenCandidate);
   }, [chosenCandidate]);
+
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersCollection = collection(db, "users");
-      const candidatesSnapshot = await getDocs(usersCollection);
-
-      const newUsersArray = [];
-
-      candidatesSnapshot.forEach((doc) => {
-        const userData = doc.data();
-        const userID = doc.id; // Access the document ID
-        newUsersArray.push({ id: userID, ...userData });
-        console.log("User data:", userData);
-        console.log("User ID:", userID);
-      });
-
-      //setCandidates(newCandidatesArray);
-      setUsers(newUsersArray);
-      setLoading(false);
+      const usersData = await DB.getUsers(setUsers, setLoading);
     };
 
     const fetchCandidates = async () => {
-      const candidatesCollection = collection(db, "candidates");
-      const candidatesSnapshot = await getDocs(candidatesCollection);
-
-      const newCandidatesArray = [];
-
-      candidatesSnapshot.forEach((doc) => {
-        const candidateData = doc.data();
-        const candidateId = doc.id; // Access the document ID
-        newCandidatesArray.push({ id: candidateId, ...candidateData });
-        console.log("Candidate data:", candidateData);
-        console.log("Candidate ID:", candidateId);
-        setChosenCandidate(candidateId);
-      });
-
-      setCandidates(newCandidatesArray);
-      setLoading(false);
+      const candidates = await DB.getCandidatesGraph(
+        setCandidates,
+        setChosenCandidate,
+        setLoading
+      );
     };
 
     fetchCandidates();
     fetchUsers();
   }, []);
   const data = {
-    labels: ["Jacob"],
+    labels: ["Gender"],
     datasets: [
       {
         label: "Female",
@@ -320,8 +297,6 @@ export default function CandidateGenderGraph() {
     <Box sx={{ flexGrow: 1, padding: 4 }}>
       {loading ? (
         <>
-          {/* <Skeleton variant="rounded" width={"100%"} height={500} /> */}
-
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -332,10 +307,6 @@ export default function CandidateGenderGraph() {
               </Grid>
             </Grid>
           </Box>
-          {/* 
-          <center>
-            <CircularProgress style={{ width: "40%", height: "40%" }} />
-          </center> */}
         </>
       ) : (
         <>
@@ -352,16 +323,13 @@ export default function CandidateGenderGraph() {
                 {candidates.map((candidate, index) => (
                   <MenuItem value={candidate.id}>{candidate.Name}</MenuItem>
                 ))}
-
-                {/* <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
               </Select>
             </FormControl>
 
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <Bar data={chartData} options={chartOptions} />;
+                  <Bar data={chartData} options={chartOptions} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Bar

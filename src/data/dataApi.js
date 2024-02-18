@@ -50,9 +50,41 @@ export default class DB {
       newCandidatesArray.push({ id: candidateId, ...candidateData });
       console.log("Candidate data:", candidateData);
       console.log("Candidate ID:", candidateId);
+
+      //setChosenCandidate(candidateId);
     });
 
     newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
+    //setCandidates(newCandidatesArray);
+
+    //setLoading(false);
+    return newCandidatesArray;
+  }
+
+  static async getCandidatesGraph(
+    setCandidates,
+    setChosenCandidate,
+    setLoading
+  ) {
+    const candidatesCollection = collection(DB.db, "candidates");
+    const candidatesSnapshot = await getDocs(candidatesCollection);
+
+    const newCandidatesArray = [];
+
+    candidatesSnapshot.forEach((doc) => {
+      const candidateData = doc.data();
+      const candidateId = doc.id; // Access the document ID
+      newCandidatesArray.push({ id: candidateId, ...candidateData });
+      console.log("Candidate data:", candidateData);
+      console.log("Candidate ID:", candidateId);
+
+      setChosenCandidate(candidateId);
+    });
+
+    newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
+    setCandidates(newCandidatesArray);
+
+    setLoading(false);
     return newCandidatesArray;
   }
 
