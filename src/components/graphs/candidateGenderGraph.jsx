@@ -302,6 +302,7 @@ export default function CandidateGenderGraph() {
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Skeleton variant="rounded" width={"100%"} height={250} />
               </Grid>
+
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Skeleton variant="rounded" width={"100%"} height={250} />
               </Grid>
