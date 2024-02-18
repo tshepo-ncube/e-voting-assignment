@@ -553,41 +553,6 @@ export default class DB {
       //setCandidates([]);
     }
   };
-  // static Limpopo = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Limpopo");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Limpopo"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
 
   static KZN = async () => {
     const provincialResultsCollection = collection(DB.db, "provincialResults");
@@ -618,49 +583,12 @@ export default class DB {
       //setProvinceData(provinceTemp);
       DB.provinceData = provinceTemp;
 
-      //console.log(DB.provinceData);
-      //console.log(DB.candidateMap);
       return DB.provinceData;
     } else {
       console.log("Document not found.");
       //setCandidates([]);
     }
   };
-  // static WesternCape = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Western Cape");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Western Cape"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
 
   static NorthWest = async () => {
     const provincialResultsCollection = collection(DB.db, "provincialResults");
@@ -670,11 +598,7 @@ export default class DB {
 
     if (gautengDoc.exists()) {
       const candidateData = gautengDoc.data();
-      //console.log("Province Results for Gauteng --------------------");
 
-      // setCandidates([candidateData]);
-
-      // Convert the object into an array of key-value pairs
       const keyValueArray = Object.entries(candidateData);
 
       // Sort the array based on the values (second element in each pair)
@@ -699,76 +623,6 @@ export default class DB {
       //setCandidates([]);
     }
   };
-  // static NorthWest = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "North West");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["North West"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
-  // static EasternCape = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Eastern Cape");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Eastern Cape"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
 
   static NorthernCape = async () => {
     const provincialResultsCollection = collection(DB.db, "provincialResults");
@@ -778,11 +632,7 @@ export default class DB {
 
     if (gautengDoc.exists()) {
       const candidateData = gautengDoc.data();
-      //console.log("Province Results for Gauteng --------------------");
 
-      // setCandidates([candidateData]);
-
-      // Convert the object into an array of key-value pairs
       const keyValueArray = Object.entries(candidateData);
 
       // Sort the array based on the values (second element in each pair)
@@ -807,41 +657,6 @@ export default class DB {
       //setCandidates([]);
     }
   };
-  // static NorthernCape = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Northern Cape");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Northern Cape"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
 
   static async getProvinces() {
     try {
@@ -857,14 +672,6 @@ export default class DB {
       await DB.KZN();
       console.log(DB.provinceData);
       return DB.provinceData;
-
-      // setCandidates(candidatesData);
-
-      // const gautengData = await DB.Gauteng();
-      // console.log(gautengData);
-
-      // const LimpopoData = await DB.Gauteng();
-      // console.log(LimpopoData);
     } catch (error) {
       console.error("Error fetching Provinces:", error);
     } finally {
@@ -909,75 +716,4 @@ export default class DB {
       //setCandidates([]);
     }
   };
-
-  // static FreeState = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Free State");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Free State"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
-  // static mpumalanga = async () => {
-  //   const provincialResultsCollection = collection(db, "provincialResults");
-  //   const gautengDocRef = doc(provincialResultsCollection, "Mpumalanga");
-
-  //   const gautengDoc = await getDoc(gautengDocRef);
-
-  //   if (gautengDoc.exists()) {
-  //     const candidateData = gautengDoc.data();
-  //     console.log("Province Results for Gauteng --------------------");
-
-  //     // setCandidates([candidateData]);
-
-  //     // Convert the object into an array of key-value pairs
-  //     const keyValueArray = Object.entries(candidateData);
-
-  //     // Sort the array based on the values (second element in each pair)
-  //     keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //     // Convert the sorted array back into an object
-  //     const sortedObject = Object.fromEntries(keyValueArray);
-
-  //     console.log(candidateData);
-
-  //     var provinceTemp = provinceData;
-  //     provinceTemp["Mpumalanga"] = sortedObject;
-
-  //     setProvinceData(provinceTemp);
-
-  //     console.log(provinceData);
-  //     console.log(candidateMap);
-  //   } else {
-  //     console.log("Document not found.");
-  //     //setCandidates([]);
-  //   }
-  // };
 }

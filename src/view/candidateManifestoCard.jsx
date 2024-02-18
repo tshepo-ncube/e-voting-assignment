@@ -37,65 +37,7 @@ export default function CandidateManifestoCard({ candidateData }) {
     setExpanded(!expanded);
   };
 
-  //   const updateVotedField = async () => {
-  //     const userEmail = localStorage.getItem("Email");
-  //     const userRefDoc = doc(db, "users", userEmail);
-
-  //     try {
-  //       // Fetch the existing document
-  //       const userDoc = await getDoc(userRefDoc);
-
-  //       if (userDoc.exists()) {
-  //         // Document exists, update the "Voted" field
-  //         await updateDoc(userRefDoc, {
-  //           Voted: true,
-  //         });
-
-  //         console.log("Document updated successfully");
-  //         localStorage.setItem("Voted", true);
-  //       } else {
-  //         console.log("Document does not exist");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating document:", error);
-  //     }
-  //   };
-
-  //   const handleVotedFor = async () => {
-  //     const userEmail = localStorage.getItem("Email");
-  //     const userRefDoc = doc(db, "users", userEmail);
-
-  //     try {
-  //       // Fetch the existing document
-  //       const userDoc = await getDoc(userRefDoc);
-
-  //       if (userDoc.exists()) {
-  //         // Document exists, update the "Voted" field
-  //         await updateDoc(userRefDoc, {
-  //           CandidateVote: candidateData.id,
-  //         });
-
-  //         // await setDoc(
-  //         //   userRefDoc,
-  //         //   { CandidateVote: candidateData.id } // Replace 'Voted' with the actual field name in your document
-  //         //   // { merge: true }
-  //         // );
-
-  //         console.log("Document updated successfully");
-  //         localStorage.setItem("Voted", true);
-  //       } else {
-  //         console.log("Document does not exist");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating document:", error);
-  //     }
-  //   };
-
   console.log(candidate);
-  // Initialize Firebase
-  //   const app = initializeApp(firebaseConfig);
-  //   const db = app.firestore();
-  //   const analytics = getAnalytics(app);
 
   const handleVoteClick = () => {
     // Increment the "Votes" value by 1
@@ -118,8 +60,6 @@ export default function CandidateManifestoCard({ candidateData }) {
       //if (localStorage.getItem("Voted")) {
       alert("You cannot vote 2 times");
     } else {
-      //alert("you have not voted");
-      // incrementVotesTransaction("Tshepo");
       DB.incrementVotesTransaction(
         candidateData,
         handleVoteClick,

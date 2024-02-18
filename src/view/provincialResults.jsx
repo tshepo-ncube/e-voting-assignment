@@ -88,448 +88,10 @@ export default function ProvincialResults() {
       }
     };
 
-    // const fetchCandidates = async () => {
-    //   const candidatesCollection = collection(db, "candidates");
-    //   const candidatesSnapshot = await getDocs(candidatesCollection);
-    //   var provincial = {
-    //     "Eastern Cape": [],
-    //     "Free State": [],
-    //     Gauteng: [],
-    //     "KwaZulu-Natal": [],
-    //     Limpopo: [],
-    //     Mpumalanga: [],
-    //     "North West": [],
-    //     "Northern Cape": [],
-    //     "Western Cape": [],
-    //   };
-
-    //   const newCandidatesArray = [];
-
-    //   candidatesSnapshot.forEach((doc) => {
-    //     const candidateData = doc.data();
-    //     const candidateId = doc.id; // Access the document ID
-    //     newCandidatesArray.push({ id: candidateId, ...candidateData });
-    //     console.log("Candidate data:", candidateData);
-    //     console.log("Candidate ID:", candidateId);
-    //     var map = {
-    //       candidateId: `${candidateData.Name} ${candidateData.Surname}`,
-    //     };
-    //     console.log(map);
-    //     setCandidateMap({
-    //       candidateId: candidateData.id,
-    //       candidateNames: `${candidateData.Name} ${candidateData.Surname}`,
-    //     });
-    //   });
-    //   newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
-    //   setCandidates(newCandidatesArray);
-    //   setLoading(false);
-    // };
-
     fetchData();
     //fetchCandidates();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchCandidates = async () => {
-  //     const candidatesCollection = collection(db, "candidates");
-  //     const candidatesSnapshot = await getDocs(candidatesCollection);
-  //     var provincial = {
-  //       "Eastern Cape": [],
-  //       "Free State": [],
-  //       Gauteng: [],
-  //       "KwaZulu-Natal": [],
-  //       Limpopo: [],
-  //       Mpumalanga: [],
-  //       "North West": [],
-  //       "Northern Cape": [],
-  //       "Western Cape": [],
-  //     };
-
-  //     const newCandidatesArray = [];
-
-  //     candidatesSnapshot.forEach((doc) => {
-  //       const candidateData = doc.data();
-  //       const candidateId = doc.id; // Access the document ID
-  //       newCandidatesArray.push({ id: candidateId, ...candidateData });
-  //       console.log("Candidate data:", candidateData);
-  //       console.log("Candidate ID:", candidateId);
-  //       var map = {
-  //         candidateId: `${candidateData.Name} ${candidateData.Surname}`,
-  //       };
-  //       console.log(map);
-  //       setCandidateMap({
-  //         candidateId: candidateData.id,
-  //         candidateNames: `${candidateData.Name} ${candidateData.Surname}`,
-  //       });
-  //     });
-  //     newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
-  //     setCandidates(newCandidatesArray);
-  //     setLoading(false);
-  //   };
-
-  //   const fetchProvinces = () => {
-  //     Gauteng();
-  //     Limpopo();
-  //     KZN();
-  //     NorthWest();
-  //     WesternCape();
-  //     EasternCape();
-  //     NorthernCape();
-  //     FreeState();
-  //     mpumalanga();
-  //     setLoading(false);
-  //   };
-
-  //   const Gauteng = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Gauteng");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Gauteng"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const Limpopo = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Limpopo");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Limpopo"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-
-  //   const KZN = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "KwaZulu-Natal");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["KwaZulu-Natal"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const WesternCape = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Western Cape");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Western Cape"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const NorthWest = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "North West");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["North West"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const EasternCape = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Eastern Cape");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Eastern Cape"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const NorthernCape = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Northern Cape");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Northern Cape"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const FreeState = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Free State");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Free State"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   const mpumalanga = async () => {
-  //     const provincialResultsCollection = collection(db, "provincialResults");
-  //     const gautengDocRef = doc(provincialResultsCollection, "Mpumalanga");
-
-  //     const gautengDoc = await getDoc(gautengDocRef);
-
-  //     if (gautengDoc.exists()) {
-  //       const candidateData = gautengDoc.data();
-  //       console.log("Province Results for Gauteng --------------------");
-
-  //       // setCandidates([candidateData]);
-
-  //       // Convert the object into an array of key-value pairs
-  //       const keyValueArray = Object.entries(candidateData);
-
-  //       // Sort the array based on the values (second element in each pair)
-  //       keyValueArray.sort((a, b) => b[1] - a[1]);
-
-  //       // Convert the sorted array back into an object
-  //       const sortedObject = Object.fromEntries(keyValueArray);
-
-  //       console.log(candidateData);
-
-  //       var provinceTemp = provinceData;
-  //       provinceTemp["Mpumalanga"] = sortedObject;
-
-  //       setProvinceData(provinceTemp);
-
-  //       console.log(provinceData);
-  //       console.log(candidateMap);
-  //     } else {
-  //       console.log("Document not found.");
-  //       //setCandidates([]);
-  //     }
-  //   };
-  //   // const fetchUsers = async () => {
-  //   //   const usersCollection = collection(db, "users");
-  //   //   const usersSnapshot = await getDocs(candidatesCollection);
-
-  //   //   const usersArray = [];
-
-  //   //   usersSnapshot.forEach((doc) => {
-  //   //     const userData = doc.data();
-  //   //     const userId = doc.id; // Access the document ID
-  //   //     usersArray.push({ id: userId, ...userData });
-  //   //     console.log("User data:", userData);
-  //   //     console.log("User ID:", userId);
-
-  //   //     //first checking if the user did vote!
-  //   //     if (userData.Voted) {
-  //   //         var userProvince = userData.Province;
-  //   //         var tshepoObject = candidates.find(
-  //   //           (candidate) => candidate.id === userData.CandidateVote
-  //   //         );
-  //   //         provincial[userProvince][userData.CandidateVote].push({
-  //   //           candidateID: userData.CandidateVote,
-  //   //           provincialVotes:
-  //   //         });
-  //   //     }
-  //   //   });
-  //   //   newCandidatesArray.sort((a, b) => b.Votes - a.Votes);
-  //   //   setCandidates(newCandidatesArray);
-  //   //   setLoading(false);
-  //   // };
-
-  //   fetchCandidates();
-  //   fetchProvinces();
-  //   //fetchUsers();
-  // }, []);
   const handleClick = () => {
     setOpen(!open);
   };
@@ -558,10 +120,6 @@ export default function ProvincialResults() {
       {loading ? (
         <>
           <Stack spacing={1}>
-            {/* <Skeleton variant="text" sx={{ fontSize: "1rem" }} /> */}
-            {/* For other variants, adjust the size with `width` and `height` */}
-            {/* <Skeleton variant="circular" width={40} height={40} />
-            <Skeleton variant="rectangular" width={210} height={60} /> */}
             <Skeleton key={"12"} variant="rounded" width={340} height={60} />
             <Skeleton key={"2"} variant="rounded" width={340} height={60} />
             <Skeleton key={"3"} variant="rounded" width={340} height={60} />
@@ -572,18 +130,6 @@ export default function ProvincialResults() {
         </>
       ) : (
         <>
-          {/* <ListItemButton>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Sent mail" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItemButton> */}
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
               <PlaceIcon />
@@ -629,13 +175,6 @@ export default function ProvincialResults() {
                   <Typography>Sorry, No voting data from Gauteng</Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -648,21 +187,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Limpopo"]) ? (
                 <>
                   {Object.entries(provinceData["Limpopo"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -683,13 +211,6 @@ export default function ProvincialResults() {
                   <Typography>Sorry, No voting data from Limpopo</Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -702,13 +223,6 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Western Cape"]) ? (
                 <>
                   {Object.entries(provinceData["Western Cape"]).map(
@@ -739,13 +253,6 @@ export default function ProvincialResults() {
                   </Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -758,21 +265,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Eastern Cape"]) ? (
                 <>
                   {Object.entries(provinceData["Eastern Cape"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -795,13 +291,6 @@ export default function ProvincialResults() {
                   </Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -814,13 +303,6 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["KwaZulu-Natal"]) ? (
                 <>
                   {Object.entries(provinceData["KwaZulu-Natal"]).map(
@@ -851,13 +333,6 @@ export default function ProvincialResults() {
                   </Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -870,21 +345,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Mpumalanga"]) ? (
                 <>
                   {Object.entries(provinceData["Mpumalanga"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -905,13 +369,6 @@ export default function ProvincialResults() {
                   <Typography>Sorry, No voting data from Mpumalanga</Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -924,21 +381,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["North West"]) ? (
                 <>
                   {Object.entries(provinceData["North West"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -959,13 +405,6 @@ export default function ProvincialResults() {
                   <Typography>Sorry, No voting data from North West</Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -978,21 +417,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Northern Cape"]) ? (
                 <>
                   {Object.entries(provinceData["Northern Cape"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -1015,13 +443,6 @@ export default function ProvincialResults() {
                   </Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
 
@@ -1034,21 +455,10 @@ export default function ProvincialResults() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Whoo" />
-          </ListItemButton> */}
-
               {isObjectNotEmpty(provinceData["Free State"]) ? (
                 <>
                   {Object.entries(provinceData["Free State"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
@@ -1069,13 +479,6 @@ export default function ProvincialResults() {
                   <Typography>Sorry, No voting data from Free State</Typography>
                 </>
               )}
-
-              {/* <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="mamam" />
-          </ListItemButton> */}
             </List>
           </Collapse>
         </>

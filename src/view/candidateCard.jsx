@@ -5,120 +5,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import DB from "../data/dataApi";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  updateDoc,
-  getDoc,
-  setDoc,
-  doc,
-  runTransaction,
-} from "firebase/firestore";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyAQApGBO474rvXb0NLeTJjTye5DBUgmHJ0",
-  authDomain: "inf4027workshop.firebaseapp.com",
-  projectId: "inf4027workshop",
-  storageBucket: "inf4027workshop.appspot.com",
-  messagingSenderId: "847946574269",
-  appId: "1:847946574269:web:d618594c3773bed7814ad4",
-  measurementId: "G-BQ911VSE7E",
-};
-
-const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-const db = getFirestore(app);
-//candidateCard.jsx:32  Uncaught (in promise) TypeError: (0 , firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(...).doc is not a function
 
 export default function CandidateCard({ candidateData }) {
   const [candidate, setCandidate] = React.useState(candidateData);
   const [candidateVotes, setCandidateVotes] = React.useState(
     candidateData.Votes
   );
-
-  // const incrementProvincialTransaction = async () =>
-  //   // async function incrementVotesTransaction(candidateId)
-  //   {
-  //     const provinceRef = doc(
-  //       db,
-  //       "provincialResults",
-  //       localStorage.getItem("Province")
-  //     );
-
-  //     try {
-  //       // Start a transaction
-  //       await runTransaction(db, async (transaction) => {
-  //         // Get the current data of the document
-  //         const docSnapshot = await transaction.get(provinceRef);
-
-  //         // Check if the document exists
-  //         if (!docSnapshot.exists()) {
-  //           throw new Error("Province document does not exist!");
-  //         }
-
-  //         // Get the current value of the dynamic field
-  //         const dynamicFieldName = candidate.id;
-  //         const currentVotes = docSnapshot.data()[dynamicFieldName] || 0;
-
-  //         // Increment the value by 1
-  //         const newVotes = currentVotes + 1;
-
-  //         // Create an object to update the dynamic field
-  //         const updateObject = { [dynamicFieldName]: newVotes };
-
-  //         // Update the document with the incremented value
-  //         transaction.update(provinceRef, updateObject);
-  //       });
-
-  //       console.log("Transaction successfully committed!");
-  //       handleVoteClick();
-  //       handleVotedFor();
-  //     } catch (error) {
-  //       console.error("Transaction failed:", error.message);
-  //     }
-  //   };
-
-  // const incrementVotesTransaction = async (candidateId) =>
-  //   // async function incrementVotesTransaction(candidateId)
-  //   {
-  //     const candidateRef = doc(db, "candidates", candidateId);
-
-  //     try {
-  //       // Start a transaction
-  //       await runTransaction(db, async (transaction) => {
-  //         // Get the current data of the document
-  //         const docSnapshot = await transaction.get(candidateRef);
-
-  //         // Check if the document exists
-  //         if (!docSnapshot.exists()) {
-  //           throw new Error("Candidate document does not exist!");
-  //         }
-
-  //         // Increment the "Votes" field by 1
-  //         const currentVotes = docSnapshot.data().Votes || 0;
-  //         const newVotes = currentVotes + 1;
-
-  //         // Update the document with the incremented value
-  //         transaction.update(candidateRef, { Votes: newVotes });
-  //       });
-
-  //       console.log("Transaction successfully committed!");
-  //       handleVoteClick();
-  //       handleVotedFor();
-  //       incrementProvincialTransaction();
-  //     } catch (error) {
-  //       console.error("Transaction failed:", error.message);
-  //     }
-  //   };
 
   const candidateHasVoted = () => {
     console.log("hey there...");
@@ -162,12 +54,6 @@ export default function CandidateCard({ candidateData }) {
           CandidateVote: candidateData.id,
         });
 
-        // await setDoc(
-        //   userRefDoc,
-        //   { CandidateVote: candidateData.id } // Replace 'Voted' with the actual field name in your document
-        //   // { merge: true }
-        // );
-
         console.log("Document updated successfully");
         localStorage.setItem("Voted", true);
       } else {
@@ -196,7 +82,7 @@ export default function CandidateCard({ candidateData }) {
 
     const updatedVotes = candidateVotes + 1;
     setCandidateVotes(updatedVotes);
-    updateVotedField();
+    DB.updateVotedField();
   };
 
   const makeAVote = () => {
@@ -210,7 +96,7 @@ export default function CandidateCard({ candidateData }) {
       DB.incrementVotesTransaction(
         candidateData,
         handleVoteClick,
-        handleVotedFor,
+
         DB.incrementProvincialTransaction
       );
     }

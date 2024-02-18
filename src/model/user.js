@@ -1,49 +1,17 @@
-class User {
+import Person from "./person";
+
+export default class User extends Person {
   constructor(id, name, surname, age, password, email, gender, province) {
-    this._id = id;
-    this._name = name;
-    this._surname = surname;
-    this._age = age;
+    // this._id = id;
+    // this._name = name;
+    // this._surname = surname;
+    // this._age = age;
+
+    super(id, name, surname, age);
     this._password = password;
     this._email = email;
     this._gender = gender;
     this._province = province;
-  }
-
-  // Getter and setter for id
-  get id() {
-    return this._id;
-  }
-
-  set id(newId) {
-    this._id = newId;
-  }
-
-  // Getter and setter for name
-  get name() {
-    return this._name;
-  }
-
-  set name(newName) {
-    this._name = newName;
-  }
-
-  // Getter and setter for surname
-  get surname() {
-    return this._surname;
-  }
-
-  set surname(newSurname) {
-    this._surname = newSurname;
-  }
-
-  // Getter and setter for age
-  get age() {
-    return this._age;
-  }
-
-  set age(newAge) {
-    this._age = newAge;
   }
 
   // Getter and setter for password
@@ -83,17 +51,17 @@ class User {
   }
 }
 
-// Example usage:
-const user = new User(
-  1,
-  "John",
-  "Doe",
-  30,
-  "password123",
-  "john.doe@example.com",
-  "male",
-  "California"
-);
-console.log(user.name); // Output: John
-user.name = "Jane";
-console.log(user.name); // Output: Jane
+// // Example usage:
+// const user = new User(
+//   1,
+//   "John",
+//   "Doe",
+//   30,
+//   "password123",
+//   "john.doe@example.com",
+//   "male",
+//   "California"
+// );
+// console.log(user.name); // Output: John
+// user.name = "Jane";
+// console.log(user.name); // Output: Jane

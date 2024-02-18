@@ -1,8 +1,9 @@
-class Person {
-  constructor(id, name, surname, age, password, email, gender, province) {
+export default class Person {
+  constructor(id, name, surname, age) {
     this._id = id;
     this._name = name;
     this._surname = surname;
+    this._age = age;
   }
 
   // Getter and setter for id
@@ -29,6 +30,15 @@ class Person {
   }
 
   set surname(newSurname) {
+    this._surname = newSurname;
+  }
+
+  // Getter and setter for surname
+  get age() {
+    return this._surname;
+  }
+
+  set age(newSurname) {
     this._surname = newSurname;
   }
 }

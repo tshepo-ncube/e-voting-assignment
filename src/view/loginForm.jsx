@@ -1,38 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  doc,
-  getDoc,
-  getDocs,
-  runTransaction,
-} from "firebase/firestore";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Initialize Firebase
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAQApGBO474rvXb0NLeTJjTye5DBUgmHJ0",
-  authDomain: "inf4027workshop.firebaseapp.com",
-  projectId: "inf4027workshop",
-  storageBucket: "inf4027workshop.appspot.com",
-  messagingSenderId: "847946574269",
-  appId: "1:847946574269:web:d618594c3773bed7814ad4",
-  measurementId: "G-BQ911VSE7E",
-};
-
-const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-const db = getFirestore(app);
 
 function LoginForm({ setLoggedIn, setTab }) {
   const [user, setUser] = useState({});
@@ -108,30 +76,6 @@ function LoginForm({ setLoggedIn, setTab }) {
     setInProgress(false);
   };
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const candidateDocRef = doc(db, "users", "m@gmail.com");
-  //       const candidateDocSnapshot = await getDoc(candidateDocRef);
-
-  //       if (candidateDocSnapshot.exists()) {
-  //         const candidateData = candidateDocSnapshot.data();
-  //         const candidateId = candidateDocSnapshot.id;
-
-  //         setUser({ id: candidateId, ...candidateData });
-
-  //         console.log("Candidate data:", candidateData);
-  //         console.log("Candidate ID:", candidateId);
-
-  //         // setCandidates(newCandidatesArray);
-  //       } else {
-  //         // Document with the specified ID doesn't exist
-  //         console.log("Document not found");
-  //         // setCandidates([]);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, []);
   return (
     <div>
       <form style={{ padding: 50 }} onSubmit={handleSubmit}>
