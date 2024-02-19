@@ -81,7 +81,6 @@ export default function CandidatesGrid() {
           <>
             {candidates.map((candidate, index) => (
               <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                {/* <CandidateCard candidateData={candidate} /> */}
                 <CandidateManifestoCard candidateData={candidate} />
               </Grid>
             ))}

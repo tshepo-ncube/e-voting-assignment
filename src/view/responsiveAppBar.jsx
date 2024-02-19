@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { red } from "@mui/material/colors";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
 const pages = ["Results"];
 const settings = ["Profile", "Logout"];
 
@@ -59,7 +60,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <HowToVoteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -75,7 +76,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
               textDecoration: "none",
             }}
           >
-            LOGO
+            DeanVoter
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

@@ -388,7 +388,7 @@ export default class DB {
     );
     //console.log(userObj.toUserObject());
     // Save the document
-    await setDoc(docRef, userObj.toUserObject())
+    await setDoc(docRef, data)
       .then(() => {
         handleClick();
         console.log("Document successfully written!");

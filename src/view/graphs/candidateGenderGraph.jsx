@@ -94,6 +94,7 @@ export default function CandidateGenderGraph() {
   };
 
   useEffect(() => {
+    console.log(`Candidate Changed To: ${chosenCandidate}`);
     candidateGenderData(chosenCandidate);
     candidateAgeData(chosenCandidate);
   }, [chosenCandidate]);
