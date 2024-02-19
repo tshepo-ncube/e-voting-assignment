@@ -9,6 +9,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
 import DB from "../data/dataApi";
+import { Typography } from "@mui/material";
 
 export default function CandidatesGrid() {
   const [candidates, setCandidates] = useState([]);
@@ -30,6 +31,12 @@ export default function CandidatesGrid() {
   }, []);
   return (
     <Box sx={{ flexGrow: 1, marginTop: 2, padding: 4 }}>
+      <center style={{ marginBottom: 10 }}>
+        <Typography style={{ fontWeight: "bold", fontSize: 32 }}>
+          Vote For Your Commerce Dean
+        </Typography>
+      </center>
+
       <Grid container spacing={2}>
         {loading ? (
           <>
