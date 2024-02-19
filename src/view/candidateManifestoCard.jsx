@@ -80,9 +80,7 @@ export default function CandidateManifestoCard({ candidateData }) {
             sx={{ bgcolor: red[500] }}
             aria-label="recipe"
             src={candidateData.ImageUrl}
-          >
-            {candidateVotes}
-          </Avatar>
+          />
         }
         action={
           <IconButton aria-label="settings">

@@ -56,6 +56,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
   const [age, setAge] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [emailExists, setEmailExists] = useState(null);
 
   const [open, setOpen] = React.useState(false);
 
@@ -122,6 +123,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
     const doesEmailExist = async () => {
       try {
         const emailStatus = await DB.emailExists(email);
+        console.log(`emailStatus : ${emailStatus}`);
 
         if (emailStatus) {
           setError(
@@ -131,8 +133,10 @@ function RegisterForm({ setLoggedIn, setTab }) {
             "Email already exist, please use a different email address."
           );
           return true;
+          setEmailExists(true);
         } else {
           console.log("Email not in DB");
+          setEmailExists(false);
           return false;
         }
       } catch (error) {
@@ -140,6 +144,8 @@ function RegisterForm({ setLoggedIn, setTab }) {
         return false;
       }
     };
+
+    doesEmailExist();
     const isAboveAge = () => {
       console.log(Number(age));
       if (Number(age) >= 18) {
@@ -231,12 +237,15 @@ function RegisterForm({ setLoggedIn, setTab }) {
       return;
     }
     console.log("checking email exist now...");
-    if (doesEmailExist()) {
-      console.log("emailll does existt, not moving forwarad");
-      return;
-    } else {
-      console.log("moving along, email not there");
+    console.log(`Email Exists : ${emailExists}`);
+
+    if (emailExists !== null) {
+      if (emailExists) {
+        console.log("emailll does existt, not moving forwarad");
+        return;
+      }
     }
+
     console.log("checking age now...");
     if (!isAboveAge()) {
       console.log("you are not above age");
@@ -249,7 +258,21 @@ function RegisterForm({ setLoggedIn, setTab }) {
       return;
     }
 
-    registerUser();
+    while (emailExists == null) {
+      if (emailExists === false) {
+        registerUser();
+      } else {
+        break;
+      }
+    }
+
+    if (emailExists === null) {
+      return;
+    }
+
+    if (emailExists === false) {
+      registerUser();
+    }
 
     setInProgress(false);
   };
