@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { red } from "@mui/material/colors";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 const pages = ["Results"];
-const settings = ["Profile", "Logout"];
+const settings = ["Logout"];
 
 function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

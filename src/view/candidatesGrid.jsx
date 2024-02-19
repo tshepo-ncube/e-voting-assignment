@@ -9,11 +9,12 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
 import DB from "../data/dataApi";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 
 export default function CandidatesGrid() {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [voting, setVoting] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,6 +30,7 @@ export default function CandidatesGrid() {
 
     fetchData();
   }, []);
+
   return (
     <Box sx={{ flexGrow: 1, marginTop: 2, padding: 4 }}>
       <center style={{ marginBottom: 10 }}>
@@ -37,56 +39,69 @@ export default function CandidatesGrid() {
         </Typography>
       </center>
 
-      <Grid container spacing={2}>
-        {loading ? (
-          <>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Skeleton variant="rounded" width={250} height={120} />
-            </Grid>
-          </>
-        ) : (
-          <>
-            {candidates.map((candidate, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                <CandidateManifestoCard candidateData={candidate} />
-              </Grid>
-            ))}
-          </>
-        )}
-      </Grid>
+      {voting ? (
+        <>
+          <center>
+            <CircularProgress style={{ width: 200, height: 200 }} />
+          </center>
+        </>
+      ) : (
+        <>
+          <Grid container spacing={2}>
+            {loading ? (
+              <>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rounded" width={250} height={120} />
+                </Grid>
+              </>
+            ) : (
+              <>
+                {candidates.map((candidate, index) => (
+                  <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                    <CandidateManifestoCard
+                      candidateData={candidate}
+                      setVoting={setVoting}
+                    />
+                  </Grid>
+                ))}
+              </>
+            )}
+          </Grid>
+        </>
+      )}
     </Box>
   );
 }

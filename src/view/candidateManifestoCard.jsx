@@ -27,7 +27,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CandidateManifestoCard({ candidateData }) {
+export default function CandidateManifestoCard({ candidateData, setVoting }) {
   const [expanded, setExpanded] = React.useState(false);
   const [candidate, setCandidate] = React.useState(candidateData);
   const [candidateVotes, setCandidateVotes] = React.useState(
@@ -36,6 +36,8 @@ export default function CandidateManifestoCard({ candidateData }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  //   const [voting, setVoting] = useState(false);
 
   console.log(candidate);
 
@@ -55,6 +57,7 @@ export default function CandidateManifestoCard({ candidateData }) {
   };
 
   const makeAVote = () => {
+    //setVoting(true);
     console.log("checking if user has voted");
     //if (false) {
     console.log();
@@ -63,12 +66,15 @@ export default function CandidateManifestoCard({ candidateData }) {
     } else {
       //alert("you have not voted");
       // incrementVotesTransaction("Tshepo");
+      localStorage.setItem("Voted", true);
       DB.incrementVotesTransaction(
         candidateData,
         handleVoteClick,
         DB.handleVotedFor,
         DB.incrementProvincialTransaction
       );
+      localStorage.setItem("Voted", true);
+      setVoting(false);
     }
   };
 

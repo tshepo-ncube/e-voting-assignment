@@ -107,7 +107,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({
       name,
@@ -132,8 +132,8 @@ function RegisterForm({ setLoggedIn, setTab }) {
           console.log(
             "Email already exist, please use a different email address."
           );
-          return true;
           setEmailExists(true);
+          return true;
         } else {
           console.log("Email not in DB");
           setEmailExists(false);
@@ -145,7 +145,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
       }
     };
 
-    doesEmailExist();
+    //doesEmailExist();
     const isAboveAge = () => {
       console.log(Number(age));
       if (Number(age) >= 18) {
@@ -239,12 +239,12 @@ function RegisterForm({ setLoggedIn, setTab }) {
     console.log("checking email exist now...");
     console.log(`Email Exists : ${emailExists}`);
 
-    if (emailExists !== null) {
-      if (emailExists) {
-        console.log("emailll does existt, not moving forwarad");
-        return;
-      }
-    }
+    // if (emailExists !== null) {
+    //   if (emailExists) {
+    //     console.log("emailll does existt, not moving forwarad");
+    //     return;
+    //   }
+    // }
 
     console.log("checking age now...");
     if (!isAboveAge()) {
@@ -258,21 +258,44 @@ function RegisterForm({ setLoggedIn, setTab }) {
       return;
     }
 
-    while (emailExists == null) {
-      if (emailExists === false) {
-        registerUser();
+    // while (emailExists == null) {
+    //   if (emailExists === false) {
+    //     registerUser();
+    //   } else {
+    //     break;
+    //   }
+    // }
+
+    // if (emailExists === null) {
+    //   return;
+    // }
+
+    // if (emailExists === false) {
+    //   registerUser();
+    // }
+
+    try {
+      const emailStatus = await DB.emailExists(email);
+      console.log(`emailStatus : ${emailStatus}`);
+
+      if (emailStatus) {
+        setError("Email already exist, please use a different email address.");
+        console.log(
+          "Email already exist, please use a different email address."
+        );
+        setEmailExists(true);
+        return;
       } else {
-        break;
+        console.log("Email not in DB");
+        setEmailExists(false);
+        //return false;
       }
+    } catch (error) {
+      console.log(error);
+      //return false;
     }
 
-    if (emailExists === null) {
-      return;
-    }
-
-    if (emailExists === false) {
-      registerUser();
-    }
+    registerUser();
 
     setInProgress(false);
   };
@@ -342,7 +365,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
             <MenuItem value={"KwaZulu-Natal"}>KwaZulu-Natal</MenuItem>
             <MenuItem value={"Limpopo"}>Limpopo</MenuItem>
             <MenuItem value={"Mpumalanga"}>Mpumalanga</MenuItem>
-            <MenuItem value={"North West"}></MenuItem>
+            <MenuItem value={"North West"}>North West</MenuItem>
             <MenuItem value={"Northern Cape"}>Northern Cape</MenuItem>
             <MenuItem value={"Eastern Cape"}>Eastern Cape</MenuItem>
             <MenuItem value={"Western Cape"}>Western Cape</MenuItem>
