@@ -139,7 +139,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
               )}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <HowToVoteIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -156,7 +156,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
               textDecoration: "none",
             }}
           >
-            LOGO
+            DeanVoter
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
