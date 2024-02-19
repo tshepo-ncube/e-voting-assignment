@@ -1,10 +1,11 @@
 class Candidate {
-  constructor(id, name, surname, votes, manifesto) {
+  constructor(id, name, surname, votes, manifesto, about) {
     this._id = id;
     this._name = name;
     this._surname = surname;
     this._votes = votes;
     this._manifesto = manifesto;
+    this.about = about;
   }
 
   // Getter method for id

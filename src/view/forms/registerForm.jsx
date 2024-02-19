@@ -16,35 +16,12 @@ import DB from "../../data/dataApi";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { InputGroup } from "react-bootstrap";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Initialize Firebase
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAQApGBO474rvXb0NLeTJjTye5DBUgmHJ0",
-  authDomain: "inf4027workshop.firebaseapp.com",
-  projectId: "inf4027workshop",
-  storageBucket: "inf4027workshop.appspot.com",
-  messagingSenderId: "847946574269",
-  appId: "1:847946574269:web:d618594c3773bed7814ad4",
-  measurementId: "G-BQ911VSE7E",
-};
-
-const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-const db = getFirestore(app);
 
 function RegisterForm({ setLoggedIn, setTab }) {
   const [user, setUser] = useState({});

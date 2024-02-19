@@ -25,25 +25,6 @@ import {
 
 import { Bar, Line } from "react-chartjs-2";
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  doc,
-  getDocs,
-  runTransaction,
-} from "firebase/firestore";
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Initialize Firebase
-
 import DB from "../../data/dataApi";
 
 ChartJS.register(
@@ -63,19 +44,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAQApGBO474rvXb0NLeTJjTye5DBUgmHJ0",
-  authDomain: "inf4027workshop.firebaseapp.com",
-  projectId: "inf4027workshop",
-  storageBucket: "inf4027workshop.appspot.com",
-  messagingSenderId: "847946574269",
-  appId: "1:847946574269:web:d618594c3773bed7814ad4",
-  measurementId: "G-BQ911VSE7E",
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export default function CandidateGenderGraph() {
   const [candidates, setCandidates] = useState([]);
