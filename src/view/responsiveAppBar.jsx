@@ -119,7 +119,7 @@ function ResponsiveAppBar({ loggedIn, setLoggedIn, setTab }) {
                     <Typography textAlign="center">Login</Typography>
                   </MenuItem>
 
-                  <MenuItem onClick={() => handleCloseNavMenu("Regiter")}>
+                  <MenuItem onClick={() => handleCloseNavMenu("Register")}>
                     <Typography textAlign="center">Register</Typography>
                   </MenuItem>
                 </>

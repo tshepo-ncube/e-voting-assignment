@@ -76,6 +76,7 @@ export default function ProvincialResults() {
         setCandidateMap({
           candidateId: lastCandidate.id,
           candidateNames: `${lastCandidate.Name} ${lastCandidate.Surname}`,
+          candidateImage: lastCandidate.ImageUrl,
         });
 
         const provData = await DB.getProvinces();
@@ -99,6 +100,11 @@ export default function ProvincialResults() {
     const candidate = candidates.find((candidate) => candidate.id === id);
     return candidate ? candidate.Name : "Candidate not found";
   };
+
+  const getCandidateImageById = (id) => {
+    const candidate = candidates.find((candidate) => candidate.id === id);
+    return candidate ? candidate.ImageUrl : "Candidate not found";
+  };
   function isObjectNotEmpty(obj) {
     return !(Object.keys(obj).length === 0 && obj.constructor === Object);
   }
@@ -112,9 +118,15 @@ export default function ProvincialResults() {
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Highest Number Of Votes In Each Province
-        </ListSubheader>
+        <>
+          <ListSubheader component="div" id="nested-list-subheader">
+            Highest Number Of Votes In Each Province
+          </ListSubheader>
+
+          <ListSubheader component="div" id="nested-list-subheader">
+            Loading may take time, please be patient
+          </ListSubheader>
+        </>
       }
     >
       {loading ? (
@@ -158,7 +170,7 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
@@ -195,13 +207,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -227,21 +240,18 @@ export default function ProvincialResults() {
                 <>
                   {Object.entries(provinceData["Western Cape"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -273,13 +283,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -307,21 +318,18 @@ export default function ProvincialResults() {
                 <>
                   {Object.entries(provinceData["KwaZulu-Natal"]).map(
                     ([key, value]) => (
-                      // <div key={key}>
-                      //   Key: {key}, Value: {value}
-                      // </div>
-
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -353,13 +361,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -389,13 +398,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -425,13 +435,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
@@ -463,13 +474,14 @@ export default function ProvincialResults() {
                         <ListItemIcon>
                           <Avatar
                             alt="Remy Sharp"
-                            src="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+                            src={getCandidateImageById(key)}
                             sx={{ width: 30, height: 30 }}
                           >
                             {value}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={getCandidateNameById(key)} />
+                        <ListItemText primary={`${value} Votes`} />
                       </ListItemButton>
                     )
                   )}
