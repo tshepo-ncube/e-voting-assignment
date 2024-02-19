@@ -59,6 +59,18 @@ function RegisterForm({ setLoggedIn, setTab }) {
 
   const [open, setOpen] = React.useState(false);
 
+  const [province, setProvince] = React.useState("Gauteng");
+
+  const handleProvinceChange = (event) => {
+    setProvince(event.target.value);
+  };
+
+  const [gender, setGender] = React.useState("Male");
+
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -79,6 +91,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
 
   const handleAgeChange = (e) => {
     setAge(e.target.value);
+    console.log(typeof e.target.value);
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -95,12 +108,6 @@ function RegisterForm({ setLoggedIn, setTab }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setInProgress(true);
-    // // Add your login logic here
-    // setEmail("");
-    // console.log("Email:", email);
-    // console.log("Password:", password);
-
     console.log({
       name,
       surname,
@@ -111,18 +118,36 @@ function RegisterForm({ setLoggedIn, setTab }) {
       password,
       confirmPassword,
     });
-    const checkIfEmailTrue = () => {
-      return true;
-    };
 
-    const checkEmailExist = () => {
-      return true;
+    const doesEmailExist = async () => {
+      try {
+        const emailStatus = await DB.emailExists(email);
+
+        if (emailStatus) {
+          setError(
+            "Email already exist, please use a different email address."
+          );
+          console.log(
+            "Email already exist, please use a different email address."
+          );
+          return true;
+        } else {
+          console.log("Email not in DB");
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
     };
-    const checkAge = () => {
-      if (age >= 18) {
+    const isAboveAge = () => {
+      console.log(Number(age));
+      if (Number(age) >= 18) {
+        console.log("Above age");
         return true;
       }
       setError("Only people above 18 years old are allowed to register.");
+      console.log("Not above age");
       return false;
     };
 
@@ -141,17 +166,6 @@ function RegisterForm({ setLoggedIn, setTab }) {
           setLoggedIn,
           handleClick
         );
-
-        // console.log(status);
-
-        // if (status.registeredUser) {
-        //   handleClick();
-        //   setTab("Vote");
-        //   setLoggedIn(true);
-        //   setError(null);
-        // } else {
-        //   setError(status.Error);
-        // }
       } catch (error) {
         console.error("Error during registration:", error.message);
         setError("An error occurred during registration");
@@ -162,118 +176,82 @@ function RegisterForm({ setLoggedIn, setTab }) {
 
     const checkPassword = () => {
       if (password === confirmPassword) {
+        console.log("pwd match");
         return true;
       }
       setError("Passwords do not match.");
+      console.log("pwd do not match");
       return false;
     };
 
-    if (!checkEmailExist()) {
-    }
+    const isDisposableEmail = async () => {
+      try {
+        const response = await fetch("https://api.mailcheck.ai/email/" + email);
 
-    if (checkIfEmailTrue()) {
-    }
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
 
-    if (!checkAge()) {
-    }
+          if (data.disposable) {
+            setError("Please use a non disposable email address");
+            console.log("disposable MAil");
+            return true;
+          } else {
+            console.log("Not disposable Mail");
+            return false;
+          }
+        } else {
+          console.error("Error fetching data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
 
+    // Call the function
+
+    const checkDisposable = async () => {
+      try {
+        const isDisposable = await isDisposableEmail();
+
+        if (isDisposable) {
+          //console.log("Email is disposable");
+          return true;
+        } else {
+          return false;
+          //console.log("Not disposable");
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+
+    console.log("checking disposable now...");
+    if (!checkDisposable()) {
+      return;
+    }
+    console.log("checking email exist now...");
+    if (doesEmailExist()) {
+      console.log("emailll does existt, not moving forwarad");
+      return;
+    } else {
+      console.log("moving along, email not there");
+    }
+    console.log("checking age now...");
+    if (!isAboveAge()) {
+      console.log("you are not above age");
+      return;
+    } else {
+      console.log("above age");
+    }
+    console.log("checking password now...");
     if (!checkPassword()) {
       return;
     }
 
     registerUser();
 
-    //check the email, if its real....
-    //check the age, if its >=18...
-    //check if password==confirmPassword
-
-    // const fetchData = async () => {
-    //   try {
-    //     const candidateDocRef = doc(db, "users", "m@gmail.com");
-    //     const candidateDocSnapshot = await getDoc(candidateDocRef);
-
-    //     if (candidateDocSnapshot.exists()) {
-    //       const candidateData = candidateDocSnapshot.data();
-    //       const candidateId = candidateDocSnapshot.id;
-
-    //       setUser({ id: candidateId, ...candidateData });
-
-    //       console.log("Candidate data:", candidateData);
-    //       console.log("Candidate ID:", candidateId);
-    //       console.log(`from db ${candidateData.Email}`);
-    //       console.log(`from db ${candidateData.Password}`);
-    //       // Check if the entered email and password match
-    //       if (
-    //         email === candidateData.Email &&
-    //         password === candidateData.Password
-    //       ) {
-    //         // Successful login logic here
-    //         console.log("Login successful!");
-    //         setLoggedIn(true);
-    //         localStorage.setItem("Email", candidateData.Email);
-    //         localStorage.setItem("Name", candidateData.Name);
-    //         localStorage.setItem("Surname", candidateData.Surname);
-    //         localStorage.setItem("loggedIn", true);
-    //         localStorage.setItem("Province", candidateData.Province);
-    //         localStorage.setItem("ID", candidateId);
-    //         localStorage.setItem("Voted", candidateData.Voted);
-    //         localStorage.setItem("Age", candidateData.Age);
-
-    //         setError(null); // Clear any previous errors
-    //         setTab("Vote");
-    //       } else {
-    //         // Display error message for incorrect email/password
-    //         setError("Invalid email or password");
-    //         console.log("invalid email or pwd");
-    //       }
-    //     } else {
-    //       console.log("Document not found");
-    //       setError("User not found");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error during login:", error.message);
-    //     setError("An error occurred during login");
-    //   }
-    // };
-    // fetchData();
     setInProgress(false);
-  };
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const candidateDocRef = doc(db, "users", "m@gmail.com");
-  //       const candidateDocSnapshot = await getDoc(candidateDocRef);
-
-  //       if (candidateDocSnapshot.exists()) {
-  //         const candidateData = candidateDocSnapshot.data();
-  //         const candidateId = candidateDocSnapshot.id;
-
-  //         setUser({ id: candidateId, ...candidateData });
-
-  //         console.log("Candidate data:", candidateData);
-  //         console.log("Candidate ID:", candidateId);
-
-  //         // setCandidates(newCandidatesArray);
-  //       } else {
-  //         // Document with the specified ID doesn't exist
-  //         console.log("Document not found");
-  //         // setCandidates([]);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, []);
-
-  const [province, setProvince] = React.useState("Gauteng");
-
-  const handleProvinceChange = (event) => {
-    setProvince(event.target.value);
-  };
-
-  const [gender, setGender] = React.useState("Male");
-
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
   };
 
   const action = (
@@ -304,6 +282,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           margin="normal"
           value={name}
           onChange={handleNameChange}
+          required
         />
         <TextField
           label="Surname"
@@ -312,6 +291,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           margin="normal"
           value={surname}
           onChange={handleSurnameChange}
+          required
         />
         <TextField
           label="Age"
@@ -320,6 +300,11 @@ function RegisterForm({ setLoggedIn, setTab }) {
           margin="normal"
           value={age}
           onChange={handleAgeChange}
+          required
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FormControl style={{ width: 200, padding: 10 }}>
           <InputLabel id="demo-simple-select-label">Province</InputLabel>
@@ -361,6 +346,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           margin="normal"
           value={email}
           onChange={handleEmailChange}
+          required
         />
         <TextField
           label="Password"
@@ -370,6 +356,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          required
         />
 
         <TextField
@@ -380,6 +367,7 @@ function RegisterForm({ setLoggedIn, setTab }) {
           type="password"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
+          required
         />
         {error && (
           <Typography

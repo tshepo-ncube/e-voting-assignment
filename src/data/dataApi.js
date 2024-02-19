@@ -9,8 +9,8 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
-
-import { useState } from "react";
+import User from "../model/user";
+import Vote from "../model/vote";
 import { initializeApp } from "firebase/app";
 
 export default class DB {
@@ -142,6 +142,24 @@ export default class DB {
     return newCandidatesArray;
   }
 
+  static caesarCipherEncrypt(inputString, shift) {
+    return inputString
+      .split("")
+      .map((char) => {
+        if (char.match(/[a-z]/i)) {
+          const code = char.charCodeAt(0);
+          const offset = char.toUpperCase() === char ? 65 : 97;
+          return String.fromCharCode(((code - offset + shift) % 26) + offset);
+        }
+        return char;
+      })
+      .join("");
+  }
+
+  static caesarCipherDecrypt(encryptedString, shift) {
+    return DB.caesarCipherEncrypt(encryptedString, -shift);
+  }
+
   static async getUsers(setUsers, setLoading) {
     // Implementation for getting users
     let users = [];
@@ -183,7 +201,7 @@ export default class DB {
         // Check if the entered email and password match
         if (
           email === candidateData.Email &&
-          password === candidateData.Password
+          password === DB.caesarCipherDecrypt(candidateData.Password, 3)
         ) {
           // Successful login logic here
           console.log("Login successful!");
@@ -219,6 +237,25 @@ export default class DB {
     // Implementation for login
   }
 
+  static emailExists = async (email) => {
+    console.log("DB says...");
+    try {
+      const candidateDocRef = doc(DB.db, "users", email);
+      const candidateDocSnapshot = await getDoc(candidateDocRef);
+
+      if (candidateDocSnapshot.exists()) {
+        console.log("DB says email is here");
+        return true;
+      } else {
+        console.log("DB says email Not here");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error during checking:", error.message);
+      return false;
+    }
+  };
+
   static incrementVotesTransaction = async (
     candidate,
     handleVoteClick,
@@ -243,9 +280,11 @@ export default class DB {
           // Increment the "Votes" field by 1
           const currentVotes = docSnapshot.data().Votes || 0;
           const newVotes = currentVotes + 1;
-
+          const voteObject = new Vote(newVotes);
+          console.log(voteObject.toVoteObject());
           // Update the document with the incremented value
-          transaction.update(candidateRef, { Votes: newVotes });
+          // transaction.update(candidateRef, { Votes: newVotes });
+          transaction.update(candidateRef, voteObject.toVoteObject());
         });
 
         console.log("Transaction successfully committed!");
@@ -336,8 +375,20 @@ export default class DB {
       Voted: false,
     };
 
+    const userObj = new User(
+      email,
+      name,
+      surname,
+      age,
+      DB.caesarCipherEncrypt(password, 3),
+      email,
+      gender,
+      province,
+      false
+    );
+    //console.log(userObj.toUserObject());
     // Save the document
-    await setDoc(docRef, data)
+    await setDoc(docRef, userObj.toUserObject())
       .then(() => {
         handleClick();
         console.log("Document successfully written!");

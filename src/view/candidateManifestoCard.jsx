@@ -56,10 +56,13 @@ export default function CandidateManifestoCard({ candidateData }) {
 
   const makeAVote = () => {
     console.log("checking if user has voted");
-    if (false) {
-      //if (localStorage.getItem("Voted")) {
+    //if (false) {
+    console.log();
+    if (localStorage.getItem("Voted") === "true") {
       alert("You cannot vote 2 times");
     } else {
+      //alert("you have not voted");
+      // incrementVotesTransaction("Tshepo");
       DB.incrementVotesTransaction(
         candidateData,
         handleVoteClick,
@@ -73,8 +76,12 @@ export default function CandidateManifestoCard({ candidateData }) {
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+            src={candidateData.ImageUrl}
+          >
+            {candidateVotes}
           </Avatar>
         }
         action={
@@ -88,7 +95,7 @@ export default function CandidateManifestoCard({ candidateData }) {
       <CardMedia
         component="img"
         height="194"
-        image="https://sit.uct.ac.za/sites/default/files/styles/square_med/public/contacts/maureen_tanner.jpg?h=926b3aec&itok=fujmQ9R6"
+        image={candidateData.ImageUrl}
         alt="Paella dish"
       />
       <CardContent>
@@ -100,12 +107,7 @@ export default function CandidateManifestoCard({ candidateData }) {
         <Button size="small" color="primary" onClick={makeAVote}>
           Vote
         </Button>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon  />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

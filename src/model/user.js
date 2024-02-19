@@ -1,7 +1,17 @@
 import Person from "./person";
 
 export default class User extends Person {
-  constructor(id, name, surname, age, password, email, gender, province) {
+  constructor(
+    id,
+    name,
+    surname,
+    age,
+    password,
+    email,
+    gender,
+    province,
+    voted
+  ) {
     // this._id = id;
     // this._name = name;
     // this._surname = surname;
@@ -12,6 +22,7 @@ export default class User extends Person {
     this._email = email;
     this._gender = gender;
     this._province = province;
+    this.voted = voted;
   }
 
   // Getter and setter for password
@@ -48,6 +59,19 @@ export default class User extends Person {
 
   set province(newProvince) {
     this._province = newProvince;
+  }
+
+  toUserObject() {
+    return {
+      Name: this.name,
+      Surname: this.surname,
+      Age: this.age,
+      Province: this.province,
+      Gender: this.gender,
+      Email: this.email,
+      Password: this.password,
+      Voted: this.voted,
+    };
   }
 }
 

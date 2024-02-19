@@ -193,9 +193,10 @@ function LoginForm({ setLoggedIn, setTab }) {
   return (
     <div>
       <form style={{ padding: 50 }} onSubmit={handleSubmit}>
-        <p>WElcome to the online voting form, please login to cast your vote</p>
-        Age : 19 Email : "m@gmail.com" ID : 232 Name : "Mana" Password :
-        "password" Province : "Gauteng" Surname : "Ncube" "Voted " : false
+        <p>
+          Welcome to the online voting form, Please login to cast your vote!
+        </p>
+
         <TextField
           label="Email"
           variant="outlined"
@@ -203,6 +204,7 @@ function LoginForm({ setLoggedIn, setTab }) {
           margin="normal"
           value={email}
           onChange={handleEmailChange}
+          required
         />
         <TextField
           label="Password"
@@ -212,6 +214,7 @@ function LoginForm({ setLoggedIn, setTab }) {
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          required
         />
         {error && (
           <Typography
