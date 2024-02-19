@@ -319,7 +319,9 @@ function RegisterForm({ setLoggedIn, setTab }) {
   return (
     <div>
       <form style={{ padding: 50 }} onSubmit={handleSubmit}>
-        <p>WElcome to the online voting form, please login to cast your vote</p>
+        <p>
+          Welcome to the online voting form, Please register to cast your vote.
+        </p>
 
         <TextField
           label="Name"
