@@ -138,7 +138,7 @@ export default function CandidateGenderGraph() {
       y: {
         beginAtZero: false, // Set to false
         min: 0, // Set the minimum value
-        max: 100, // Set the maximum value
+        max: 30, // Set the maximum value
       },
     },
   };
@@ -253,7 +253,7 @@ export default function CandidateGenderGraph() {
       y: {
         beginAtZero: true,
         min: 0, // Set the minimum value
-        max: 100, // Set the maximum value
+        max: 30, // Set the maximum value
         title: {
           display: true,
           text: "Number of Voters",
