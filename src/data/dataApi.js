@@ -201,7 +201,8 @@ export default class DB {
         // Check if the entered email and password match
         if (
           email === candidateData.Email &&
-          password === DB.caesarCipherDecrypt(candidateData.Password, 3)
+          //password === DB.caesarCipherDecrypt(candidateData.Password, 3)
+          password === candidateData.Password
         ) {
           // Successful login logic here
           console.log("Login successful!");
